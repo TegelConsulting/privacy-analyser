@@ -1,0 +1,17 @@
+name: 🐛 Bug report
+description: Rapportera ett fel
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steg för att återskapa
+  - type: textarea
+    id: expected
+    attributes:
+      label: Förväntat resultat
+  - type: textarea
+    id: actual
+    attributes:
+      label: Faktiskt resultat
