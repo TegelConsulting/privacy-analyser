@@ -5,8 +5,10 @@ export default async function Home() {
   console.log("Connected to MongoDB from Home component");
 
   return (
-    <main>
-      <h1>Hej från MongoDB!</h1>
+    <main className="flex min-h-screen items-center justify-center">
+      <h1 className="text-3xl font-semibold text-gray-800">
+        Hej från MongoDB!
+      </h1>
     </main>
   );
 }
