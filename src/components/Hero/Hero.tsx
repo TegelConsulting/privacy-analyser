@@ -4,7 +4,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
-export default function Hero() {
+interface HeroProps {
+  title: string;
+  subtitle: string;
+  ctaText: string;
+  ctaLink: string;
+}
+
+export default function Hero({ title, subtitle, ctaText, ctaLink }: HeroProps) {
   return (
     <section className="w-full min-h-screen flex flex-col md:flex-row items-center justify-center gap-24 px-6 md:px-16 pt-8 md:pt-20 max-w-7xl mx-auto overflow-hidden">
       {/* LEFT SIDE — TEXT & CTA BUTTONS */}
@@ -15,21 +22,19 @@ export default function Hero() {
         transition={{ duration: 0.8, ease: "easeOut" }}
       >
         <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight tracking-tight">
-          Optimera din webbsida
+          {title}
         </h1>
 
         <p className="text-gray-600 text-xl leading-relaxed max-w-lg">
-          Upptäck brister i GDPR, tillgänglighet och kodstandard.
-          <br />
-          Få en tydlig rapport med konkreta förbättringsförslag – snabbt och automatiserat.
+          {subtitle}
         </p>
 
         <div className="flex flex-wrap gap-5 pt-4">
           <Link
-            href="/dashboard"
+            href={ctaLink}
             className="bg-black text-white px-10 py-3 rounded-lg font-medium hover:bg-gray-800 transition-all"
           >
-            Gör analys
+            {ctaText}
           </Link>
           <Link
             href="/products"

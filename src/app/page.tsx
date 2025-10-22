@@ -4,10 +4,10 @@ export default function Home() {
   return (
     <main className="flex flex-col items-center justify-center min-h-screen bg-gray-50 px-4 sm:px-8">
       <Hero
-        title="Privacy Analyser"
-        subtitle="Analysera din webbplats ur ett integritets- och tillgänglighetsperspektiv. Upptäck GDPR-brister, kodfel och tillgänglighetsproblem på några sekunder."
-        ctaText="Starta analys"
-        ctaLink="#"
+        title="Optimera din webbsida"
+        subtitle="Upptäck GDPR-brister, tillgänglighetsproblem och kodfel på bara några sekunder. Få en tydlig rapport med konkreta förbättringsförslag – snabbt och automatiserat."
+        ctaText="Gör analys"
+        ctaLink="/dashboard"
       />
     </main>
   );
