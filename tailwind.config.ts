@@ -1,7 +1,8 @@
 ﻿import type { Config } from "tailwindcss";
 
 const config: Config = {
-  darkMode: ["class"],
+  // ⬇️ Fix: använd en sträng, inte en array med ett element
+  darkMode: "class",
   theme: {
     extend: {
       colors: {
@@ -25,4 +26,5 @@ const config: Config = {
   },
   plugins: [],
 };
+
 export default config;
