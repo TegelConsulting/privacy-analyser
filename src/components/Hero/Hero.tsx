@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 export default function Hero() {
   return (
-    <section className="w-full min-h-screen flex flex-col-reverse md:flex-row items-center justify-center gap-24 px-6 md:px-16 pt-8 md:pt-20 max-w-7xl mx-auto overflow-hidden">
+    <section className="w-full min-h-screen flex flex-col md:flex-row items-center justify-center gap-24 px-6 md:px-16 pt-8 md:pt-20 max-w-7xl mx-auto overflow-hidden">
       {/* LEFT SIDE — TEXT & CTA BUTTONS */}
       <motion.div
         className="flex-1 text-left space-y-10"
@@ -59,8 +59,8 @@ export default function Hero() {
           />
         </div>
 
-        {/* Text under bilden */}
-        <p className="text-gray-600 text-base md:text-lg max-w-md leading-relaxed -mt-8 text-center">
+        {/* Text under bilden centrerad och nära bilden */}
+        <p className="text-gray-600 text-base md:text-lg max-w-md leading-relaxed mt-4 text-center">
           <span className="whitespace-nowrap">
             Vi tror på en web som är både säker och tillgänglig för alla.
           </span>
