@@ -1,68 +1,80 @@
 "use client";
-import SummaryCard from "./SummaryCard";
-import ReportList from "./ReportList";
-import IssuesList from "./IssuesList";
+
+import Image from "next/image";
+import Link from "next/link";
+import { motion } from "framer-motion";
 
 export default function Hero() {
   return (
-    <section className="w-full max-w-6xl mx-auto py-16 px-6 flex flex-col gap-12">
-      {/* Snabbanalys av URL */}
-      <div className="bg-white shadow-md rounded-xl p-8 text-center">
-        <h1 className="text-3xl font-bold text-gray-900 mb-4">
-          Snabbanalys av URL
+    <section className="w-full min-h-screen flex flex-col-reverse md:flex-row items-center justify-center gap-24 px-6 md:px-16 pt-8 md:pt-20 max-w-7xl mx-auto overflow-hidden">
+      {/* LEFT SIDE — TEXT & CTA BUTTONS */}
+      <motion.div
+        className="flex-1 text-left space-y-10"
+        initial={{ opacity: 0, y: -40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+      >
+        <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-gray-900 leading-tight tracking-tight">
+          Optimera din webbsida
         </h1>
-        <p className="text-gray-600 mb-8">
-          Analysera din webbplats för GDPR, tillgänglighet och kodstandarder.
+
+        <p className="text-gray-600 text-xl leading-relaxed max-w-lg">
+          Upptäck brister i GDPR, tillgänglighet och kodstandard.
+          <br />
+          Få en tydlig rapport med konkreta förbättringsförslag – snabbt och automatiserat.
         </p>
 
-        <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
-          <input
-            type="text"
-            placeholder="https://example.com"
-            className="border border-gray-300 rounded-md px-4 py-2 w-80"
+        <div className="flex flex-wrap gap-5 pt-4">
+          <Link
+            href="/dashboard"
+            className="bg-black text-white px-10 py-3 rounded-lg font-medium hover:bg-gray-800 transition-all"
+          >
+            Gör analys
+          </Link>
+          <Link
+            href="/products"
+            className="bg-black text-white px-10 py-3 rounded-lg font-medium hover:bg-gray-800 transition-all"
+          >
+            Produkter
+          </Link>
+        </div>
+      </motion.div>
+
+      {/* RIGHT SIDE — IMAGE & ABOUT TEXT */}
+      <motion.div
+        className="flex-1 flex flex-col items-center text-center md:items-center md:text-center -translate-y-8"
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.9, ease: "easeOut", delay: 0.2 }}
+      >
+        {/* Bilden */}
+        <div className="w-full max-w-3xl">
+          <Image
+            src="/images/hero/hero-illustration.png"
+            alt="Illustration av webbanalys"
+            width={900}
+            height={900}
+            priority
+            className="w-full h-auto object-contain"
           />
-
-          <div className="flex gap-3">
-            <label className="flex items-center gap-2">
-              <input type="checkbox" defaultChecked /> GDPR
-            </label>
-            <label className="flex items-center gap-2">
-              <input type="checkbox" /> W3C
-            </label>
-            <label className="flex items-center gap-2">
-              <input type="checkbox" /> Accessibility
-            </label>
-          </div>
-
-          <button className="bg-black text-white rounded-md px-6 py-2 hover:bg-gray-800 transition">
-            Starta analys
-          </button>
         </div>
-      </div>
 
-      {/* Sammanfattning */}
-      <div>
-        <h2 className="text-2xl font-semibold mb-4">
-          Sammanfattning av sökresultat
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-          <SummaryCard title="GDPR" percentage={35} />
-          <SummaryCard title="W3C" percentage={67} />
-          <SummaryCard title="Accessibility" percentage={82} />
-        </div>
-      </div>
-
-      {/* Senaste rapporter */}
-      <div>
-        <h2 className="text-2xl font-semibold mb-4">Senaste rapporter</h2>
-        <ReportList />
-      </div>
-
-      {/* Top 3 issues */}
-      <div>
-        <h2 className="text-2xl font-semibold mb-4">Top 3 Issues</h2>
-        <IssuesList />
-      </div>
+        {/* Text under bilden */}
+        <p className="text-gray-600 text-base md:text-lg max-w-md leading-relaxed -mt-8 text-center">
+          <span className="whitespace-nowrap">
+            Vi tror på en web som är både säker och tillgänglig för alla.
+          </span>
+          <br />
+          Privacy Analyser gör det enkelt att förstå hur din webbplats hanterar
+          integritet, tillgänglighet och kodstandard – på bara några sekunder.{" "}
+          <Link
+            href="/about"
+            className="inline-block text-black font-medium underline underline-offset-4 hover:text-gray-700 transition-colors ml-1"
+          >
+            Läs mer →
+          </Link>
+        </p>
+      </motion.div>
     </section>
   );
 }
