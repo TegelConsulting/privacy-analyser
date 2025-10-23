@@ -1,14 +1,19 @@
 import { connectToDatabase } from "./lib/mongodb";
+import Hero from "../components/Hero/Hero";
+
 
 export default async function Home() {
   await connectToDatabase();
   console.log("Connected to MongoDB from Home component");
 
   return (
-    <main className="flex min-h-screen items-center justify-center">
-      <h1 className="text-3xl font-semibold text-gray-800">
-        Hej från MongoDB!
-      </h1>
+    <main className="flex flex-col items-center justify-center min-h-screen bg-gray-50 px-4 sm:px-8">
+      <Hero
+        title="Optimera din webbsida"
+        subtitle="Upptäck GDPR-brister, tillgänglighetsproblem och kodfel på bara några sekunder. Få en tydlig rapport med konkreta förbättringsförslag – snabbt och automatiserat."
+        ctaText="Gör analys"
+        ctaLink="/dashboard"
+      />
     </main>
   );
 }
