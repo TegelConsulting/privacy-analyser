@@ -1,21 +1,28 @@
-import mongoose from "mongoose";
+import { MongoClient } from 'mongodb';
 
-let isConnected: boolean = false;
+const uri = process.env.MONGODB_URI!;
+const options = {};
 
+let client: MongoClient;
+let clientPromise: Promise<MongoClient>;
 
-export const connectToDatabase = async () => {
-  if (isConnected) {
-    console.log('Already connected to MongoDB');
-    return;
+if (!process.env.MONGODB_URI) {
+  throw new Error('Please add your Mongo URI to .env.local');
+}
+
+declare global {
+  var _mongoClientPromise: Promise<MongoClient> | undefined;
+}
+
+if (process.env.NODE_ENV === 'development') {
+  if (!global._mongoClientPromise) {
+    client = new MongoClient(uri, options);
+    global._mongoClientPromise = client.connect();
   }
+  clientPromise = global._mongoClientPromise;
+} else {
+  client = new MongoClient(uri, options);
+  clientPromise = client.connect();
+}
 
-  try {
-    await mongoose.connect(process.env.MONGO_URI || '', {
-        dbName:'privacyanalyser',
-    })
-    isConnected = true;
-;
-  } catch (error) {
-    console.error('Error connecting to MongoDB:', error);
-  }
-};
+export default clientPromise;

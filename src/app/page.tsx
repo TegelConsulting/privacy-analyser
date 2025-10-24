@@ -3,8 +3,7 @@ import Hero from "../components/Hero/Hero";
 
 
 export default async function Home() {
-  await connectToDatabase();
-  console.log("Connected to MongoDB from Home component");
+
 
   return (
     <main className="flex flex-col items-center justify-center min-h-screen bg-gray-50 px-4 sm:px-8">
