@@ -1,14 +1,14 @@
 import Hero from "../components/Hero/Hero";
 import Image from "next/image";
- 
+
 export default async function Home() {
   // Connect to MongoDB (server-side only)
   await connectToDatabase();
- 
+
   return (
-<div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-<main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-<Image
+    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
+      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
+        <Image
           className="dark:invert"
           src="/next.svg"
           alt="Next.js logo"
@@ -16,38 +16,28 @@ export default async function Home() {
           height={38}
           priority
         />
- 
+
         {/* Include the Hero section */}
-<Hero />
- 
+        <Hero
+          title="Optimera din webbsida"
+          subtitle="Upptäck GDPR-brister, tillgänglighetsproblem och kodfel på bara några sekunder. Få en tydlig rapport med konkreta förbättringsförslag – snabbt och automatiserat."
+          ctaText="Gör analys"
+          ctaLink="/dashboard"
+        />
+
         <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-<li className="mb-2 tracking-[-.01em]">
+          <li className="mb-2 tracking-[-.01em]">
             Get started by editing{" "}
-<code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
+            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
               src/app/page.tsx
-</code>
+            </code>
             .
-</li>
-<li className="tracking-[-.01em]">
+          </li>
+          <li className="tracking-[-.01em]">
             Save and see your changes instantly.
-</li>
-</ol>
-</main>
-</div>
-  );
-}
-
-export default async function Home() {
-
-
-  return (
-    <main className="flex flex-col items-center justify-center min-h-screen bg-gray-50 px-4 sm:px-8">
-      <Hero
-        title="Optimera din webbsida"
-        subtitle="Upptäck GDPR-brister, tillgänglighetsproblem och kodfel på bara några sekunder. Få en tydlig rapport med konkreta förbättringsförslag – snabbt och automatiserat."
-        ctaText="Gör analys"
-        ctaLink="/dashboard"
-      />
-    </main>
+          </li>
+        </ol>
+      </main>
+    </div>
   );
 }
