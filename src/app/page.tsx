@@ -1,24 +1,19 @@
-"use client";
+// import { connectToDatabase } from "./lib/mongodb";
+import Hero from "../components/Hero/Hero";
 
-import { QuickScanCard } from "@/components/dashboard/QuickScanCard";
-import { SummaryCard } from "@/components/dashboard/SummaryCard";
-import { TopIssuesCard } from "@/components/dashboard/TopIssuesCard";
-import { RecentReportsCard } from "@/components/dashboard/RecentReportsCard";
 
-export default function DashboardPage() {
+export default async function Home() {
+  await connectToDatabase();
+  console.log("Connected to MongoDB from Home component");
+
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-      {/* Vänster kolumn */}
-      <div className="lg:col-span-2 space-y-6">
-        <QuickScanCard />
-        <SummaryCard />
-      </div>
-
-      {/* Höger kolumn */}
-      <aside className="space-y-6">
-        <TopIssuesCard />
-        <RecentReportsCard />
-      </aside>
-    </div>
+    <main className="flex flex-col items-center justify-center min-h-screen bg-gray-50 px-4 sm:px-8">
+      <Hero
+        title="Optimera din webbsida"
+        subtitle="Upptäck GDPR-brister, tillgänglighetsproblem och kodfel på bara några sekunder. Få en tydlig rapport med konkreta förbättringsförslag – snabbt och automatiserat."
+        ctaText="Gör analys"
+        ctaLink="/dashboard"
+      />
+    </main>
   );
 }
