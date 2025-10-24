@@ -2,7 +2,9 @@
   "name": "privacy-analyser",
   "version": "0.1.0",
   "private": true,
-  "engines": { "node": "20.x" },
+  "engines": {
+    "node": "20.x"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -11,6 +13,7 @@
   },
   "dependencies": {
     "@auth/mongodb-adapter": "^3.11.0",
+    "bcrypt": "^6.0.0",
     "bcryptjs": "^3.0.2",
     "mongodb": "^6.20.0",
     "next-auth": "^5.0.0-beta.29",
@@ -25,6 +28,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4.1.14",
+    "@types/bcrypt": "^6.0.0",
     "@types/bcryptjs": "^2.4.6",
     "@types/node": "^20",
     "@types/react": "^19",
