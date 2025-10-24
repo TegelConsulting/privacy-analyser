@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@auth/mongodb-adapter": "^3.11.0",
-    "bcryptjs": "^3.0.2",                       // behåll bara bcryptjs
+    "bcryptjs": "^3.0.2",
     "mongodb": "^6.20.0",
     "next-auth": "^5.0.0-beta.29",
     "zod": "^4.1.12",
