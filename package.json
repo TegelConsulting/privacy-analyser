@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "node": "20.x"
+    "node": ">=20.x"
   },
   "scripts": {
     "dev": "next dev",
@@ -12,6 +12,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "react-icons": "^5.5.0",
     "@auth/mongodb-adapter": "^3.11.0",
     "bcrypt": "^6.0.0",
     "bcryptjs": "^3.0.2",
