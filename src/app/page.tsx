@@ -1,3 +1,4 @@
+// import { connectToDatabase } from "./lib/mongodb";
 import Hero from "../components/Hero/Hero";
 
 
