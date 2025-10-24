@@ -1,0 +1,19 @@
+/* Footer.css */
+
+/* Import the Crimson Text font */
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&display=swap');
+
+.footer {
+  width: 100%;
+  background-color: #000; /* black bar */
+  color: #fff; /* white text */
+  text-align: center;
+  padding: 1.5rem 0; /* vertical space */
+  font-family: 'Crimson Text', serif;
+  font-size: 1.8rem; /* similar to screenshot size */
+  letter-spacing: 0.05em;
+}
+
+.footer p {
+  margin: 0;
+}
