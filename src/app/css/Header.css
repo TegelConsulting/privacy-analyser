@@ -1,0 +1,91 @@
+.hamburger-icon {
+    display: none;
+}
+ .listItem:hover {
+        color: blue;
+}
+.icon-container {
+    display: flex;
+    position: absolute;
+    right: 100px;
+    gap: 10px;
+}
+.icon-container input {
+    background-color: #fff;
+    border-radius: 10px;
+    width: auto;
+}
+.icon-container-mobile {
+    display: none;
+}
+
+.grid {
+    display: grid;
+    position: relative;
+    grid-template-columns: repeat(auto-fit, minmax(37rem, 1fr)); /* 16rem → 14rem */
+    gap: clamp(12px, 2vw, 32px);
+}
+
+@media only screen and (max-width: 767px) {
+   .grid {
+        grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); /* 16rem → 14rem */
+        gap: clamp(12px, 2vw, 32px);
+    }
+    .headrow {
+        position: relative;
+    }
+    .icon-container {
+        display: none;
+    }
+    .icon-container-mobile {
+        display: flex;
+        gap: 0.5rem;
+    }
+    .headrow .logo {
+        white-space: nowrap;
+    }
+    .logo {
+        font-size: 2.5em;
+    }
+    .hamburger-icon {
+        display: block;
+        position: relative;
+        top: 2px;
+    }
+    .bar {
+        display: block;
+        background-color: #fff;
+        height: 2px;
+        width: 20px;
+        margin: 5px;
+    }
+   .close-icon {
+        position: absolute;
+        top: 16px;          /* fast avstånd från toppen */
+        right: 16px;        /* fast avstånd från höger */
+        width: 2rem;
+        height: 2rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+    }
+    .closebar {
+        position: absolute;
+        width: 24px;                 /* längden på “strecket” */
+        height: 2px;                 /* tjockleken */
+        background: #fff;
+        transform-origin: center;    /* rotera kring mitten */
+        border-radius: 1px;
+    }
+
+    .closebar:nth-child(1){
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    .closebar:nth-child(2){
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+
+   
+}
