@@ -10,6 +10,10 @@ const nextConfig: NextConfig = {
     // Bygg ändå även om TS hittar fel
     ignoreBuildErrors: true,
   },
+  images: {
+    // Inaktivera bildoptimering för att undvika "sharp"-fel
+    unoptimized: true,
+  },
 };
 
 export default nextConfig;
