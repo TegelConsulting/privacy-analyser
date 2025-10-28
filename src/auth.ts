@@ -2,11 +2,11 @@ import NextAuth from 'next-auth';
 import Google from 'next-auth/providers/google';
 import Credentials from 'next-auth/providers/credentials';
 import { compare } from 'bcrypt';
-import clientPromise from './app/lib/mongodb';
+import { getDb } from '@/app/lib/mongodb'; // ⬅️ ändrat hit
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   //   pages: {
-  //     signIn: '/login', // Custom sign-in route for later use when login page is created
+  //     signIn: '/login',
   //   },
   providers: [
     Google({
@@ -14,7 +14,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
     Credentials({
-      // Custom email/password provider
       name: 'credentials',
       credentials: {
         email: { label: 'Email', type: 'email' },
@@ -26,8 +25,8 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             return null;
           }
 
-          const client = await clientPromise;
-          const db = client.db();
+          // ⬇️ ändrat till lazy DB
+          const db = await getDb();
 
           const user = await db.collection('users').findOne({
             email: (credentials.email as string).toLowerCase(),
@@ -62,7 +61,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     strategy: 'jwt',
   },
   callbacks: {
-    // Callbacks to handle JWT and session data
     async jwt({ token, user }) {
       if (user) {
         token.id = user.id;
@@ -81,12 +79,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     },
     authorized({ auth, request: { nextUrl } }) {
       const isLoggedIn = !!auth?.user;
-      const isOnDashBoard = nextUrl.pathname.startsWith('/dashboard'); // Might need adjustment based on actual protected routes
+      const isOnDashBoard = nextUrl.pathname.startsWith('/dashboard');
       if (isOnDashBoard) {
         if (isLoggedIn) return true;
         return false;
       } else if (isLoggedIn) {
-        return Response.redirect(new URL('/dashboard', nextUrl.origin)); // same here, adjust as needed
+        return Response.redirect(new URL('/dashboard', nextUrl.origin));
       }
       return true;
     },

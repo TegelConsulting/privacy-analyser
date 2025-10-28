@@ -1,7 +1,11 @@
 import { NextResponse } from 'next/server';
 import bcrypt from 'bcrypt';
 import { z } from 'zod';
-import clientPromise from '@/app/lib/mongodb';
+import { getDb } from '@/app/lib/mongodb'; // ⬅️ ändrat
+
+// Kör på Node (bcrypt kräver det) och hindra prerender av API-routen
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
 
 const registerSchema = z.object({
   username: z
@@ -9,7 +13,7 @@ const registerSchema = z.object({
     .min(3, 'Username must be at least 3 characters long')
     .max(20, 'Username must be no more than 20 characters long')
     .regex(/^[a-zA-Z0-9]+$/, 'Username can only contain letters and numbers'),
-  email: z.email('Invalid email format'),
+  email: z.string().email('Invalid email format'),
   password: z
     .string()
     .min(6, 'Password must be at least 6 characters long')
@@ -29,8 +33,8 @@ export async function POST(req: Request) {
 
     const { username, email, password } = validationResult.data;
 
-    const client = await clientPromise;
-    const db = client.db();
+    // ⬇️ ändrat: hämta DB via lazy helper
+    const db = await getDb();
 
     // Check if user already exists
     const existing = await db.collection('users').findOne({
@@ -60,16 +64,13 @@ export async function POST(req: Request) {
     // Insert new user
     const result = await db.collection('users').insertOne({
       username,
-      email: email.toLowerCase(), // Normalize email for consistency
+      email: email.toLowerCase(),
       password: hashedPassword,
       createdAt: new Date(),
     });
 
     return NextResponse.json(
-      {
-        message: 'User registered successfully',
-        userId: result.insertedId,
-      },
+      { message: 'User registered successfully', userId: result.insertedId },
       { status: 201 }
     );
   } catch (error) {

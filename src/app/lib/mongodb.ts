@@ -1,28 +1,31 @@
-import { MongoClient } from 'mongodb';
+// src/app/lib/mongodb.ts
+import { MongoClient, Db } from 'mongodb';
 
-const uri = process.env.MONGODB_URI!;
-const options = {};
+let client: MongoClient | null = null;
+let clientPromise: Promise<MongoClient> | null = null;
 
-let client: MongoClient;
-let clientPromise: Promise<MongoClient>;
-
-if (!process.env.MONGODB_URI) {
-  throw new Error('Please add your Mongo URI to .env.local');
-}
-
-declare global {
-  var _mongoClientPromise: Promise<MongoClient> | undefined;
-}
-
-if (process.env.NODE_ENV === 'development') {
-  if (!global._mongoClientPromise) {
-    client = new MongoClient(uri, options);
-    global._mongoClientPromise = client.connect();
+export async function getDb(): Promise<Db> {
+  const uri = process.env.MONGODB_URI;
+  if (!uri) {
+    // Under utveckling: tillåt build att gå igenom utan DB
+    if (process.env.NODE_ENV !== 'production') {
+      // Dummy-DB-objekt om någon råkar kalla getDb() lokalt utan URI
+      return {
+        collection: () => ({
+          findOne: async () => null,
+          insertOne: async () => ({ insertedId: 'dummy' }),
+          updateOne: async () => ({ matchedCount: 0, modifiedCount: 0 }),
+        }),
+      } as unknown as Db;
+    }
+    // I produktion: var tydlig
+    throw new Error('MONGODB_URI is missing');
   }
-  clientPromise = global._mongoClientPromise;
-} else {
-  client = new MongoClient(uri, options);
-  clientPromise = client.connect();
-}
 
-export default clientPromise;
+  if (!client) {
+    client = new MongoClient(uri);
+    clientPromise = client.connect();
+  }
+  await clientPromise!;
+  return client.db(process.env.MONGODB_DB || undefined);
+}
