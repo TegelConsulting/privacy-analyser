@@ -1,0 +1,52 @@
+body {
+    background-color: #fff;
+}
+.analysisView {
+    font-family: 'Times New Roman', Times, serif;
+    width: 48.875em;
+    color: #0000;    
+    background-color: #E2E8F0;
+    padding: 1.75em;
+    border-radius: .6em;
+    box-shadow: 4px 3px 3px #9f9f9f;
+}
+.formContainer {
+    margin-left: 10em;
+}
+.analysisForm input {
+    width: 20em;
+    border-radius: .2em;
+    padding: 2px;
+    background-color: #fff;
+    box-shadow: 3px 3px 1px #9f9f9f;
+}
+.analysisForm button {
+    width: 7.5em;
+    margin-left: 0.5em;
+    background-color: #000;
+    color: #fff;
+    font-size: 0.8em;
+    padding: 5px;
+    border-radius: 0.8em;
+    box-shadow: 2px 3px 1px #9f9f9f
+}
+.analysisView h1 {
+    color: #000;
+    font-size: 3em;
+    text-align: center;
+}
+.checkboxes {
+    display: flex;
+    margin-left: 10px;
+    gap: 1.5em;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+.checkboxes section {
+    background-color: transparent;
+}
+label {
+    color: #000;
+    font-size: 1.1em;
+    margin-left: 5px;
+}
