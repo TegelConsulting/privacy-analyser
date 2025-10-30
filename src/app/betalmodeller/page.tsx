@@ -1,53 +1,49 @@
 // src/app/betalmodeller/page.tsx
-import React from 'react';
-import Link from 'next/link';
-import { PaymentModel, paymentModels } from '@/lib/paymentModels';
+import PricingCard from "@/components/pricing/PricingCard";
+import { PAYMENT_PLANS } from "@/lib/paymentModels";
+import Image from "next/image";
+import robot from "@/app/assets/logo/robot.svg";
 
-function Price({ model }: { model: PaymentModel }) {
-  if (model.pricePerMonth === null) return <span className="text-sm">Pris: Offert</span>;
-  if (model.pricePerMonth === 0) return <span className="text-sm">Gratis</span>;
-  return <span className="text-sm font-semibold">{model.pricePerMonth} SEK / mån</span>;
-}
+export const metadata = { title: "Betalmodeller" };
 
-export default function BetalmodellerPage() {
-  // Server-side rendering: använder mock direkt (ingen fetch). 
-  // Om du vill hälla från API: använd fetch('/api/payment-models') med { cache: 'no-store' } i client-side.
-  const models = paymentModels;
-
+export default function PricingPage() {
   return (
-    <main className="max-w-6xl mx-auto p-6">
-      <header className="mb-6">
-        <h1 className="text-3xl font-semibold">Betalmodeller</h1>
-        <p className="text-gray-600 mt-2">Välj den plan som matchar din användning. Antal analyser anges per månad.</p>
-      </header>
+    <section className="bg-white">
+      <div className="mx-auto max-w-6xl px-4 py-14">
+        <p className="text-center text-[13px] text-slate-600 max-w-2xl mx-auto">
+          Vi erbjuder tre flexibla nivåer för att passa alla behov från små webbplatser till stora organisationer.
+        </p>
 
-      <section className="grid gap-6 grid-cols-1 md:grid-cols-3">
-        {models.map(m => (
-          <article key={m.id} className={`p-6 rounded-2xl border ${m.recommended ? 'border-blue-500 shadow-lg' : 'border-gray-200'} bg-white`}>
-            {m.recommended && <div className="text-xs font-medium uppercase text-blue-600 mb-2">Rekommenderad</div>}
-            <h2 className="text-xl font-medium">{m.title}</h2>
-            <p className="text-gray-600 mt-2">{m.description}</p>
+        <div className="mt-10 grid gap-6 md:grid-cols-3">
+          {PAYMENT_PLANS.map((p) => (
+            <PricingCard key={p.slug} plan={p} />
+          ))}
+        </div>
 
-            <div className="mt-4 flex items-baseline justify-between">
-              <div>
-                <Price model={m} />
-                <div className="text-sm text-gray-500">
-                  {m.analysesPerMonth === -1 ? 'Obegränsat antal analyser' : `${m.analysesPerMonth} analyser / månad`}
-                </div>
-              </div>
+        <div className="mt-16 flex justify-center">
+          <Image
+            src={robot}
+            alt="Nova – vår lilla hjälprobot"
+            width={130}
+            height={130}
+            className="opacity-90 hover:scale-105 transition-transform duration-300"
+          />
+        </div>
 
-              <div className="flex flex-col gap-2">
-                <Link href={`/betalmodeller/${m.id}`} className="px-4 py-2 rounded-lg bg-blue-600 text-white text-sm inline-block text-center">
-                  Detaljer
-                </Link>
-                <Link href={`/signup?plan=${m.id}`} className="px-4 py-2 rounded-lg border text-sm text-center">
-                  Välj
-                </Link>
-              </div>
-            </div>
-          </article>
-        ))}
-      </section>
-    </main>
+        <div className="mt-12 flex flex-col items-center gap-3">
+          <p className="text-[12px] text-slate-500 text-center">
+            Vet du inte var du ska börja? Låt oss guida dig!
+          </p>
+          <div className="flex flex-wrap justify-center gap-6">
+            <a className="rounded-md border border-slate-300 px-5 py-2 text-sm font-medium text-slate-900 hover:bg-slate-100">
+              Börja här
+            </a>
+            <a className="rounded-md bg-slate-900 px-5 py-2 text-sm font-semibold text-white hover:bg-black">
+              Chatta med oss
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
   );
 }
