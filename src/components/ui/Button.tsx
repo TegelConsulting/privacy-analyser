@@ -1,4 +1,5 @@
 ﻿"use client";
+
 import * as React from "react";
 
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
@@ -15,9 +16,9 @@ export function Button({
 }: ButtonProps) {
   const base =
     "inline-flex items-center justify-center select-none font-semibold " +
-    "transition-all duration-150 focus-visible:outline-none " +
-    "focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 " +
-    "disabled:opacity-50 disabled:pointer-events-none";
+    "transition-transform duration-500 ease-in-out transition-shadow " +
+    "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black focus-visible:ring-offset-2 " +
+    "disabled:opacity-50 disabled:pointer-events-none will-change-transform";
 
   const sizeCls =
     size === "sm"
@@ -28,10 +29,10 @@ export function Button({
 
   const variantCls =
     variant === "primary"
-      ? "pa-btn pa-btn--primary shadow-sm hover:shadow-md hover:-translate-y-0.5 hover:rounded-xl active:translate-y-0"
+      ? "pa-btn pa-btn--primary shadow-sm hover:shadow-md hover:scale-102 active:scale-100 rounded-xl"
       : variant === "ghost"
-      ? "pa-btn pa-btn--ghost hover:bg-gray-100"
-      : "pa-btn bg-white border-2 border-black text-gray-900 hover:bg-gray-50";
+      ? "pa-btn pa-btn--ghost hover:bg-gray-100 hover:scale-101"
+      : "pa-btn bg-white border-2 border-black text-gray-900 hover:bg-gray-50 hover:scale-101";
 
   return (
     <button
