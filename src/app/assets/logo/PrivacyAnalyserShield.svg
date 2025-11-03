@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none">
+  <!-- Sköld -->
+  <path d="M12 2.5l7 3v6c0 6-4.5 9.5-7 10.8C9.5 21 5 17.5 5 11.5v-6l7-3z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"></path>
+  <!-- Bock -->
+  <path d="M8.5 12.5l2.2 2.2 4.8-4.8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+</svg>
