@@ -1,6 +1,6 @@
-/* Base setup */
+/* ====== GENERAL STYLING ====== */
 body {
-  font-family: system-ui, sans-serif;
+  font-family: "Inter", system-ui, sans-serif;
   background-color: #e9edf2;
   color: #000;
   margin: 0;
@@ -11,114 +11,158 @@ body {
 
 .report-card {
   background-color: #e9edf2;
-  width: 800px;
-  border-radius: 10px;
-  padding: 2rem;
+  width: 850px;
+  border-radius: 16px;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Headings */
+/* ====== HEADINGS ====== */
 h1 {
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
+  font-size: 2.3rem;
+  margin: 0;
+  font-weight: 700;
 }
 
-/* Summary Section */
+/* ====== SUMMARY SECTION ====== */
 .summary {
   display: flex;
   align-items: center;
-  gap: 2rem;
-  margin-bottom: 2rem;
+  gap: 2.5rem;
 }
 
 .score-circle {
+  position: relative;
   width: 120px;
   height: 120px;
-  border-radius: 50%;
-  background-color: #d3d3d3;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.5rem;
-  font-weight: bold;
 }
 
+.score-number {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+/* ====== PROGRESS RING ====== */
+.progress-ring-bg {
+  stroke-linecap: round;
+}
+
+.progress-ring-fill {
+  stroke-linecap: round;
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+  stroke-dasharray: 314; /* circumference of circle (2πr) */
+  stroke-dashoffset: 314;
+  animation: fillProgress 1.5s ease-out forwards;
+}
+
+@keyframes fillProgress {
+  to {
+    stroke-dashoffset: calc(314 - (314 * 82) / 100);
+  }
+}
+
+/* ====== SUMMARY TEXT ====== */
 .summary-text {
   background-color: #fff;
-  padding: 1rem;
-  border-radius: 8px;
+  padding: 1.2rem 1.5rem;
+  border-radius: 10px;
   border: 1px solid #ccc;
-  width: 100%;
+  line-height: 1.5;
+  flex: 1;
 }
 
 .summary-date {
   font-size: 0.9rem;
-  color: #555;
+  color: #666;
 }
 
-/* Category Section */
+/* ====== CATEGORY SECTION ====== */
 .categories {
   display: flex;
   justify-content: space-between;
-  gap: 1rem;
-  margin-bottom: 2rem;
+  gap: 1.2rem;
 }
 
 .category {
   background-color: #fff;
   border: 1px solid #ccc;
-  border-radius: 8px;
-  padding: 1rem;
+  border-radius: 12px;
+  padding: 1.2rem 1.5rem;
   width: 100%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
 .category h2 {
   margin-top: 0;
+  margin-bottom: 0.5rem;
 }
 
-/* Tags */
+/* ====== TAGS ====== */
 .tag {
   display: inline-block;
-  font-size: 0.8rem;
-  font-weight: bold;
-  padding: 0.2rem 0.5rem;
-  border-radius: 4px;
-  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+  margin-right: 0.4rem;
 }
 
 .major {
-  background-color: #e67300;
+  background-color: #f59e0b;
+  color: #000;
 }
 
 .minor {
-  background-color: #b3d233;
+  background-color: #d9f99d;
   color: #000;
 }
 
 .critical {
-  background-color: #c0392b;
+  background-color: #dc2626;
+  color: #fff;
 }
 
-/* Buttons */
+/* ====== BUTTONS ====== */
 .buttons {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  margin-top: 1rem;
 }
 
 button {
   font-size: 1rem;
-  padding: 0.8rem;
-  border-radius: 8px;
-  border: 1px solid #000;
+  padding: 0.9rem;
+  border-radius: 10px;
   cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s ease;
 }
 
 .download-btn {
   background-color: #000;
   color: #fff;
+  border: none;
+}
+
+.download-btn:hover {
+  opacity: 0.85;
 }
 
 .new-analysis-btn {
   background-color: #fff;
   color: #000;
+  border: 1.5px solid #000;
+}
+
+.new-analysis-btn:hover {
+  background-color: #f5f5f5;
 }
