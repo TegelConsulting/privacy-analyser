@@ -12,7 +12,6 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "react-icons": "^5.5.0",
     "@auth/mongodb-adapter": "^3.11.0",
     "bcrypt": "^6.0.0",
     "bcryptjs": "^3.0.2",
@@ -24,6 +23,7 @@
     "next-auth": "^5.0.0-beta.29",
     "react": "19.1.0",
     "react-dom": "19.1.0",
+    "react-icons": "^5.5.0",
     "zod": "^4.1.12"
   },
   "devDependencies": {
