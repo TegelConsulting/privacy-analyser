@@ -1,6 +1,6 @@
 "use Client"
 
-import { Issue } from "@/lib/types"
+import { Issue } from "@/lib/types/Issue"
 import React from "react"
 
 export const SeverityBadge: React.FC<{ severity: Issue["severity"]}> = ({severity}) => {
@@ -18,6 +18,7 @@ export const SeverityBadge: React.FC<{ severity: Issue["severity"]}> = ({severit
         ? "text-yelloe-800"
         : "text-green-800"
 
+        
     return (
         <span className={`${color}`}>
             {label}

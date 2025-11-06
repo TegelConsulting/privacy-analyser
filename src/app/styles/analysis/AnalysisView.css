@@ -2,6 +2,8 @@ body {
     background-color: #fff;
 }
 .analysisView {
+    /* position: absolute; */
+    margin: 2em 30em;
     font-family: 'Times New Roman', Times, serif;
     width: 48.875em;
     color: #0000;    
@@ -21,7 +23,7 @@ body {
     box-shadow: 3px 3px 1px #9f9f9f;
     color: #9f9f9f;
 }
-.analysisForm input:hover, :active {
+.analysisForm input:hover {
     border: 1px solid #000;
     box-shadow: none
 }
@@ -46,6 +48,9 @@ body {
     font-size: 3em;
     text-align: center;
 }
+.close-btn:hover {
+    background-color: #9f9f9f;
+}
 .checkboxes {
     display: flex;
     margin-left: 10px;
@@ -60,27 +65,4 @@ label {
     color: #000;
     font-size: 1.1em;
     margin-left: 5px;
-}
-.Overview {
-    display: flex;
-    flex-direction: column;
-}
-.Overview .chart-container {
-    display: flex;
-    width: 200px;
-    height: 40px;
-}
-.Overview h2 {
-    color: #000;
-    font-size: 2em;
-    margin-bottom: .25em;
-}
-.Overview .chart-container .chart {
-    margin-left: 2em;
-}
-.reportCard {
-    color: #000;
-}
-.issues {
-    margin-top: 50px;
 }

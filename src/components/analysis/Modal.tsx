@@ -1,8 +1,7 @@
 "use client";
-import { CrossIcon, Icon } from "lucide-react";
 import React, { useEffect } from "react";
 import ReactDOM  from "react-dom";
-import "../../app/styles/analysis/Modal.css"
+import { AiOutlineClose } from "react-icons/ai";
 
 type ModalProps = {
     open: boolean;
@@ -33,23 +32,25 @@ export const Modal: React.FC<ModalProps> = ({open, onClose, title, children }) =
                     role="dialog"
                     aria-modal="true"
                     aria-label={title ?? "Dialog"}
-                    className="w-full max-w-3xl rounded bg-white p-6 shadow-xl"
+                    className="w-full max-w-3xl rounded bg-[#E2E8F0] p-4 shadow-xl"
                     onClick={(e) => e.stopPropagation()}
                     >
                         <header className="mb-4 flex items-center justify-between">
                             <h2 className="text-xl font-semibold">{title}</h2>
-                            <button
+                            <button 
+                                 type="submit"
                                  onClick={onClose}
                                  aria-label="Stäng"
-                                 className="rounded-md p-2 hover:bg-gray-100" 
-                            >
-                                </>
+                                 className="close-btn rounded-2xl p-2 bg-white border "                             >
+                                <AiOutlineClose/>
                             </button>
                         </header>
+                        {children}
                 </article>
             </section>
-        </section>    
-    );
+        </section>,   
+        document.body
+    )
 };
 
 export default Modal;

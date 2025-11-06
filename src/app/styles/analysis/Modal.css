@@ -31,4 +31,7 @@
   display: flex;
   justify-content: flex-end;
   font-size: 25px;
+} 
+button {
+  background-color: gray;
 }

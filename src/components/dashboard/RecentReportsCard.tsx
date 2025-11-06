@@ -1,7 +1,7 @@
 ﻿"use client";
 import { Card } from "@/components/ui/Card";
 import { Download } from "lucide-react";
-import { reports } from "@/lib/mock";
+import { reports } from "@/lib/mock/sum/cat/Category_Label";
 
 function domainOf(url: string) {
   try { return new URL(url).hostname.replace(/^www\./, ""); } catch { return url; }

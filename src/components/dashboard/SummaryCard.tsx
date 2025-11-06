@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Card } from "@/components/ui/Card";
 import { ProgressBar } from "@/components/ui/ProgressBar";
-import { summary } from "@/lib/mock";
+import { summary } from "@/lib/mock/sum/cat/Category_Label";
 
 export function SummaryCard() {
   const [open, setOpen] = useState(false);
