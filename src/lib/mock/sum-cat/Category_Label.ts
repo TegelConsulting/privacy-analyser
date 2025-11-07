@@ -1,8 +1,8 @@
-﻿import type { Category } from "@/lib/types/Category";
+﻿import type { Category_Label } from "@/lib/types/Category";
 
-export const Category_Label: Record<Category, string> = {
-  GDPR: "GDPR",
+export const Categories: Record<Category_Label, string> = {
   W3C: "W3C",
+  GDPR: "GDPR",
   Accessibility: "Tillgänglighet"
 } 
 

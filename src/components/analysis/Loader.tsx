@@ -1,8 +1,11 @@
 "use Client"
 import "../../app/styles/analysis/Loader.css"
+import React from "react"
+import ReactDOM from "react-dom"
 
-export const Loader = () => {
-    return (
+export const Loader: React.FC = () => {
+    return ReactDOM.createPortal(
+      <section className="fixed inset-0 z-[60] flex items-center justify-center bg-black/40">
         <section className="loaderContainer">
           <p>
             Laddar
@@ -11,6 +14,7 @@ export const Loader = () => {
             <span className="dot dot3">.</span>
           </p>
         </section>
-
+      </section>,
+      document.body
     )
 }

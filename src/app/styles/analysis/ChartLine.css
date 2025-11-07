@@ -1,5 +1,24 @@
-.chart-container .line {
-    background-color: aliceblue;
+.line {
+    width: 400px;
+}
+@media screen and (max-width: 690px) {
+.line {
+    width: 300px;
+}
+}
+@media screen and (max-width: 570px) {
+.line {
     width: 200px;
-    height: 25px;
+}
+}
+@media screen and (max-width: 490px) {
+.chart-container {
+    margin-left: -10px;
+}
+.chart-container .line-container {
+    width: 65%;
+} 
+.chart-container .line {
+    height: 20px;
+}
 }

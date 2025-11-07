@@ -33,5 +33,36 @@
   font-size: 25px;
 } 
 button {
-  background-color: gray;
+  background-color: #fff;
+}
+.close-btn:hover {
+  background-color: #9f9f9f;
+}
+.show-modal {
+  opacity: 1;
+  animation: show 5s;
+} 
+@keyframes show {
+  from {
+    opacity: 0;
+    transform: scale(1);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1); 
+  }
+}
+.show-modal {
+  opacity: 0;
+  animation: hide .25s;
+}
+@keyframes hide {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0); 
+  }
 }

@@ -1,26 +1,49 @@
 body {
     background-color: #fff;
+    min-height: 100svh; 
 }
+
+.analysisView-container {
+    display: flex;
+    width: 100%;
+    margin-top: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
 .analysisView {
-    /* position: absolute; */
-    margin: 2em 30em;
+    position: relative;
     font-family: 'Times New Roman', Times, serif;
-    width: 48.875em;
+    width: 60%;
     color: #0000;    
     background-color: #E2E8F0;
-    padding: 1.75em;
     border-radius: .6em;
     box-shadow: 4px 3px 3px #9f9f9f;
+    height: fit-content;
+    padding: 1em 1em 0 1em;
+    max-width: 90vw;
 }
-.formContainer {
-    margin-left: 10em;
+.formContainer p {
+    position: absolute;
+    color: #000;
+    top: 120px;
+}
+.analysisForm {
+    position: absolute;
+    display: flex;
+    width: 100%;
 }
 .analysisForm input {
-    width: 20em;
+    width: 82%;
+    height: 100%;
     border-radius: .2em;
-    padding: 2px;
+    padding: 4px;
     background-color: #fff;
     box-shadow: 3px 3px 1px #9f9f9f;
+    color: #000;
+    max-width: 90vw;
+}
+.analysisForm input::placeholder {
     color: #9f9f9f;
 }
 .analysisForm input:hover {
@@ -29,14 +52,17 @@ body {
 }
 
 .analysisForm button {
-    width: 7.5em;
-    margin-left: 0.5em;
+    position: absolute;
+    right: 4%;
+    width: 13%;
+    max-width: 90vw;
     background-color: #000;
     color: #fff;
     font-size: 0.8em;
     padding: 5px;
     border-radius: 0.8em;
-    box-shadow: 2px 3px 1px #9f9f9f
+    box-shadow: 2px 3px 1px #9f9f9f;
+ 
 }
 .analysisForm button:hover {
     background-color: #fff;
@@ -51,18 +77,119 @@ body {
 .close-btn:hover {
     background-color: #9f9f9f;
 }
-.checkboxes {
-    display: flex;
-    margin-left: 10px;
-    gap: 1.5em;
-    margin-top: 5px;
-    margin-bottom: 5px;
-}
-.checkboxes section {
-    background-color: transparent;
-}
 label {
     color: #000;
     font-size: 1.1em;
     margin-left: 5px;
+}
+.form-mobile {
+    display: none;
+}
+.clear-btn {
+    margin-left: 10px;
+    color: #000;
+}
+.clear-btn:hover {
+    color: #9f9f9f;
+}
+.checkboxes {
+    display: flex;
+    margin: 2.5em 1em 2.5em ;   
+}
+.url {
+    margin-left: -5px;
+}
+@media screen and (max-width: 980px) {
+    .analysisForm input {
+        width: 78%;
+    }
+    .analysisForm button {
+        width: 16%;
+    }
+}
+@media screen and (max-width: 800px) {
+   .analysisView {
+        width: 80%;
+        height: 100%;
+   }
+    .analysisForm {
+        width: 100%;
+    }
+    .analysisForm button {
+        width: 13%;
+        margin: 0 .5em;
+    }
+    .analysisForm input {
+        width: 80%;
+    }
+     .checkboxes {
+        display: flex;
+        } 
+}
+@media screen and (max-width: 728px) {
+   .analysisForm button {
+        width: 15%;
+        margin: 0 .8em;
+        white-space: nowrap;
+    }
+    .analysisForm input {
+        width: 78%;
+    }
+}
+@media screen and (max-width: 670px) {
+    .checkboxes {
+        display: flex;
+    }  
+     .analysisForm input {
+        width: 73%;    
+    }
+    
+    .analysisForm button {
+        width: 20%;
+        white-space: nowrap;
+    } 
+}
+@media screen and (max-width: 500px) {
+    span {
+        font-size: .9em;
+    }
+}
+@media screen and (max-width: 500px) {
+    .analysisView {
+        width: 80%;
+        height: auto;
+   }
+   .analysisView h1 {
+        font-size: 2em;
+   }
+    .labels {
+        display: flex;
+        flex-direction: column;
+    }
+    .checkboxes {
+        display: flex;
+        margin: 2.5em 0 9em;
+    }  
+     .analysisForm input {
+        width: 90%;    
+    }
+    
+    .analysisForm button {
+        width: 30%;
+        white-space: nowrap;
+        right: 30px;      
+        top: 35px;
+    } 
+    .formContainer p {
+        position: relative;
+        color: #000;
+        width: 90%;
+    }
+    .labels button {
+        position: relative;
+        right: 30px;
+    }
+    .label-container {
+        font-size: 1em;
+    }    
 }
