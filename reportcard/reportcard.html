@@ -9,10 +9,7 @@
 <body>
   <main class="report-card">
     <h1>Analysrapport</h1>
-<div class="reportcard-actions">
-  <button onclick="copyURL()">📋 Kopiera URL</button>
-  <button onclick="toggleAll()">Expandera / Kollapsa alla</button>
-</div>
+
 
  <section class="summary">
   <div class="score-circle">
@@ -57,18 +54,24 @@
       <button class="download-btn">Ladda ner fullständig PDF-rapport</button>
       <button class="new-analysis-btn">Starta ny analys</button>
     </section>
-    <script>
-  function copyURL() {
-    navigator.clipboard.writeText(window.location.href);
-    alert("URL kopierad till urklipp!");
-  }
 
-  function toggleAll() {
-    const details = document.querySelectorAll("details");
-    const open = Array.from(details).some(d => d.open);
-    details.forEach(d => d.open = !open);
-  }
+<script>
+  document
+    .querySelector(".new-analysis-btn")
+    ?.addEventListener("click", function () {
+      console.log("Ny analys startad!");
+      alert("Ny analys startad!");
+    });
 </script>
+<script>
+  document
+    .querySelector(".download-btn")
+    ?.addEventListener("click", function () {
+      console.log("PDF-nedladdning startad!");
+      alert("PDF laddas ner!");
+    });
+</script>
+
 
   </main>
 </body>
