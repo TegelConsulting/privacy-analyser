@@ -1,27 +1,17 @@
 "use Client"
-
-import { Issue } from "@/lib/types/Issue"
 import React from "react"
 
-export const SeverityBadge: React.FC<{ severity: Issue["severity"]}> = ({severity}) => {
-    const label = 
-        severity === "high"
-        ? "Hög"
-        : severity === "medium"
-        ? "Medel"
-        : "Låg"
 
-    const color = 
-        severity === "high" 
-        ? "text-red-800"
-        : severity === "medium"
-        ? "text-yelloe-800"
-        : "text-green-800"
-
-        
-    return (
-        <span className={`${color}`}>
-            {label}
-        </span>
-    )
-}
+export const SeverityBadge: React.FC<{ severity: "low" | "medium" | "high" }> = ({ severity }) => {
+  const cls =
+    severity === "high"
+      ? "bg-red-100 text-red-800 border-red-300"
+      : severity === "medium"
+      ? "bg-yellow-100 text-yellow-800 border-yellow-300"
+      : "bg-green-100 text-green-800 border-green-300";
+  return (
+    <span className={`inline-block rounded-full border px-2 py-0.5 text-xs font-medium ${cls}`}>
+      {severity}
+    </span>
+  );
+};

@@ -1,214 +1,145 @@
-"use client"
-import "../styles/analysis/AnalysisView.css"
-import { getReportByUrl} from "@/app/service/reportService";
-import React, { useEffect, useState } from "react"
+"use client";
+
+import React, { useMemo, useState } from "react";
+import "@/app/styles/analysis/AnalysisView.css";
+import { Checkbox } from "@/components/ui/Checkbox";
+import { Button } from "@/components/ui/Button";
+import { ChartLine } from "@/components/analysis/ChartLine";
 import { ReportCard } from "@/components/analysis/ReportCard";
 import { IssueRow } from "@/components/analysis/IssueRow";
-import { ChartLine } from "@/components/analysis/ChartLine";
 import Modal from "@/components/analysis/Modal";
-import { Issue } from "@/lib/types/Issue";
-import { MockData } from "@/lib/types/MockData";
-import { Category_Label } from "@/lib/types/Category";
-import { FilteredData } from "@/lib/types/FilteredData";
-import { Summary } from "@/lib/types/Summary";
-import { AsyncModal } from "@/components/analysis/AsyncModal";
-import { tr } from "zod/locales";
+import { Loader } from "@/components/analysis/Loader";
+import type { Filter_Label } from "@/lib/types/Filter_Label";
+import type { ScanResult } from "@/lib/types/ScanResult";
+import { FilterList } from "@/lib/mock/sum-cat/FilterLabels";
+import { getReportByUrl } from "@/app/service/reportService";
+import { getFiltered, ALL_FILTERS } from "@/app/functions/getFiltered";
 
-export const AnalysisView: React.FC<{id: Issue["id"], issue: Issue}> = () => {
-    const [url, setUrl] = useState("");
-    const [loading, setLoading] = useState(false);
-    const [data, setData] = useState<MockData | null>(null);
-    const [showResult, setShowResult] = useState(false);
-    const [filter, setFilter] = useState<Category_Label[]>([]);
-    const [errorOpen, setErrorOpen] = useState(false);
-    const [errorMsg, setErrorMsg] = useState<string | null>(null);
-    const [now, setNow] = useState(new Date());
+export default function Page() {
+  const [url, setUrl] = useState<string>("https://exempel.se");
+  const [selected, setSelected] = useState<Filter_Label[]>([]);
+  const [scan, setScan] = useState<ScanResult | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [open, setOpen] = useState(false);
 
-    const toggleFilter = (cat: Category_Label) => {
-        setFilter(prev => 
-            prev.includes(cat) ? prev.filter(c => c !== cat) : [...prev, cat]
-        )
+  const onToggle = (f: Filter_Label) => {
+    setSelected((prev) => prev.includes(f) ? prev.filter(x => x !== f) : [...prev, f]);
+  };
+
+  const selectedOrAll: Filter_Label[] = selected.length ? selected : (ALL_FILTERS as unknown as Filter_Label[]);
+
+  const stats = scan?.stats ?? { gdpr: 0, w3c: 0, accessibility: 0 };
+
+  const { filteredIssues, filteredSummaries } = useMemo(() => {
+    if (!scan) return { filteredIssues: [], filteredSummaries: [] };
+    return getFiltered(scan, selectedOrAll);
+  }, [scan, selectedOrAll]);
+
+  const onSubmit: React.FormEventHandler = async (e) => {
+    e.preventDefault();
+    setError(null);
+
+    if (!/^https?:\/\//i.test(url)) {
+      setError("Ange en giltig URL som börjar med http(s)://");
+      return;
     }
 
-    const CategoryList: Record<Category_Label, string> = {
-        GDPR: "GDPR",
-        W3C: "W3C",
-        Accessibility: "Tillgänglighet",
-    };
-
-    const SUMMARY_BY_CATEGORY = (summary: Summary): Record<Category_Label, number> => ({
-      GDPR: summary.gdpr,
-      W3C: summary.w3c,
-      Accessibility: summary.accessibility,
-    });
-
-    const getFiltered = (data: MockData, selected: Category_Label[]): FilteredData => {
-        const selectedOrAll: Category_Label[] =
-          selected.length ? selected : ["GDPR", "W3C", "Accessibility"];
-    
-        const filteredIssues = data.issues.filter(issue =>
-          issue.categories.some(c => selectedOrAll.includes(c))
-        );
-    
-        const summaryMap = SUMMARY_BY_CATEGORY(data.summary);
-    
-        const filteredSummaries = selectedOrAll.map(c => ({
-          cat: c,
-          label: CategoryList[c],
-          value: summaryMap[c],
-        }));
-    
-        const filteredReports = data.reports.filter(r =>
-            r.tags.some(t => selectedOrAll.includes(t))
-        )
-    
-        return { filteredIssues, filteredSummaries, filteredReports };
-    };
-
-    const filtered = data ? getFiltered(data, filter) : null;
-
-    useEffect(() => {
-        const timer = setInterval(() => setNow(new Date()), 1000);
-        return () => clearInterval(timer)
-    }, [])
-
-    const handleSubmit = async (e: React.FormEvent) => { 
-        e.preventDefault();
-        setLoading(true);
-        
-        try {
-            const trimmed = url.trim();
-            
-            if (!trimmed) {
-                setData(null);
-                setErrorMsg("Du måste ange en URL.");
-                setErrorOpen(true);
-
-                return;
-            }  
-
-            const result = await getReportByUrl(trimmed);
-            console.log("getReportByUrl result:", result);
-           
-            if (!result) {
-                setData(null);
-                setErrorMsg(`Ingen rapport hittades för ${trimmed}`)
-                setErrorOpen(true);
-                return;
-            }
-            
-            setData(result);
-            setShowResult(true);
-
-        } catch (err) {
-            console.error(err);
-            setData(null);
-            setErrorMsg("Ett oväntat fel inträffade. Försök igen.")
-            setErrorOpen(true);
-        } finally {
-            setLoading(false);
-        }
+    setLoading(true);
+    try {
+      const res = await getReportByUrl(url);
+      setScan(res);
+      setOpen(true); // öppna modal med resultat
+    } catch (err: any) {
+      console.error(err);
+      setScan(null);
+      setError(err?.message ?? "Kunde inte hämta analys.");
+    } finally {
+      setLoading(false);
     }
+  };
 
-    return ( 
-        <section className="analysisView-container">
-        <section className="analysisView"> 
-            <h1>Ny Analys</h1>
-            <section className="formContainer">
-            <form onSubmit={handleSubmit} className="analysisForm">
-                {/* Testa input med "https://exempel.se" */}
-                <input value={url} 
-                        onChange={(e) => setUrl(e.target.value)}
-                        placeholder="https://url.se"
-                        minLength={10}
-                        maxLength={30}
-                        type="url"
-                        required
-                />
-                <button 
-                  type="submit"
-                  disabled={loading}
-                  >
-                    Starta analys
-                  </button>
-                </form>
-            <AsyncModal 
-                open={errorOpen}
-                onClose={() => setErrorOpen(false)}
-                title="Fel"
-                delayMs={2000}
-            >{errorMsg}</AsyncModal>
-            <section className="check-container flex absoulute">
-                <section className="checkboxes">    
-                    <section className="labels flex absolute gap-2">
-                    <label className="flex items-center gap-1">
-                        <input 
-                            type="checkbox" 
-                            checked={filter.includes("GDPR")}
-                            onChange={() => toggleFilter("GDPR")}
-                        />
-                        {CategoryList.GDPR}
-                    </label>
-                    <label className="flex items-center gap-1">
-                        <input 
-                            type="checkbox" 
-                            checked={filter.includes("W3C")}
-                            onChange={() => toggleFilter("W3C")}
-                        />
-                        {CategoryList.W3C}
-                    </label>
-                    <label className="flex items-center gap-1">
-                        <input 
-                            type="checkbox" 
-                            checked={filter.includes("Accessibility")}
-                            onChange={() => toggleFilter("Accessibility")}
-                        />
-                        {CategoryList.Accessibility}    
-                    </label>
-                    <button type="button" onClick={() => setFilter([])} className="clear-btn text-sm underline">
-                        Rensa filter
-                    </button>
-                    </section>
-                </section>
-            </section>
+  return (
+    <section className="analysisView-container">
+      <section className="analysisView">
+        <header className="analysisViewHeader">
+          <h1>Analys</h1>
+          <p className="analysisViewDate">{new Date().toLocaleString()}</p>
+        </header>
+
+        <form onSubmit={onSubmit} className="form-container">
+          <section className="input-container gap-2">
+          <input
+            className="urlInput bg-white rounded text-black p-1"
+            value={url}
+            onChange={(e) => setUrl(e.target.value)}
+            placeholder="https://dinsajt.se"
+          />
           
+          <button type="submit" className="submit bg-white text-black rounded" disabled={loading}>
+            Starta analys
+          </button>
+          {error && <p className="errorText">{error}</p>}
+          </section>
+       
+          <div className="label-container">
+            <div className="labels">
+              {(ALL_FILTERS as unknown as Filter_Label[]).map((f) => (
+                <Checkbox
+                  key={f}
+                  checked={selected.includes(f)}
+                  onChange={() => onToggle(f)}
+                  label={FilterList[f]}
+                />
+              ))}
+            </div>
+            </div>
+        </form>
+                {loading && <Loader />} 
+
+        {/* Modal som visar resultatet */}
+        <Modal open={open} onClose={() => setOpen(false)} title="Sammanfattning av analys">
+          <section className="reportResult bg-white p-2 rounded" >
+            <section className="flex gap-5">
+              {/* Kortsiffror */}
+              <section className="reportCards ">
+                {selectedOrAll.map((cat) => {
+                  const item = filteredSummaries.find(s => s.cat === cat);
+                  const value = item?.value ?? stats[cat] ?? 0;
+                  return <ReportCard key={cat} label={FilterList[cat]} value={value}  />;
+                })}
+              </section>
+
+
+              {/* Procentlinjer */}
+              <section className="chart-container">
+                {(() => {
+                  const map = new Map(filteredSummaries.map(s => [s.cat, s.value]));
+                  const total = Array.from(map.values()).reduce((a,b)=>a+b,0);
+                  return selectedOrAll.map((cat) => {
+                    const value = map.get(cat) ?? stats[cat] ?? 0;
+                    const percent = value > 100 ? Math.min(100, value) : (total ? Math.round((value/total)*100) : 0);
+                    return <ChartLine key={cat} cat={cat} percent={percent} />;
+                 });
+                })()}
+              </section>
             </section>
-            {/* Modal */}
-            {data && (
-                <AsyncModal open={showResult} 
-                       onClose={() => setShowResult(false)}
-                       title="Sammanfattning av analys"
-                       delayMs={2000} 
-                >
-                    <section className="bg-white p-4 border rounded">
-                        <h2 className="url text-xl mb-5"><b>Url:</b> {url}</h2>
-                       <section className="chart-container">
-                            <section className="flex gap-15">
-                                <section className="label-container grid gap-1 font-semibold">
-                                   {filtered?.filteredSummaries.map(s => (
-                                        <ReportCard key={s.cat} label={s.label} value={s.value}/>
-                                   ))}
-                                 </section>
-                                 <section className="chart grid gap-1 ml-[-45px]">
-                                    {filtered?.filteredIssues.map(c => (
-                                        <ChartLine id={c.id} key={c.id} issue={c}/>
-                                    ))}
-                                 </section>
-                             </section>
-                             <ul className="issues list-[circle] pl-6 marker:text-gray-400 mt-4 mb-4">
-                                {filtered?.filteredIssues.map(i => (
-                                    <IssueRow key={i.id} issue={i}/>
-                                ))}
-                             </ul>
-                        </section>
-                        <p>Hämtad: {now.toISOString().slice(0, 10)} {now.toLocaleTimeString("sv-SE", { hour: "2-digit", minute: "2-digit" })}</p>
- 
-                    </section>
-                    </AsyncModal>
-            )}
+            {/* Ärenden-lista */}
+            <section className="issuesSection">
+              <h3>Identifierade ärenden</h3>
+              {filteredIssues.length === 0 ? (
+                <p>Inga ärenden hittades för valda filter.</p>
+              ) : (
+                <ul className="issuesList">
+                  {filteredIssues.map((it) => (
+                    <li key={it.id}><IssueRow issue={it} /></li>
+                  ))}
+                </ul>
+              )}
             </section>
-        </section>
-        
-    )
+          </section>
+        </Modal>
+      </section>
+    </section>
+  );
 }
-export default AnalysisView 

@@ -8,7 +8,7 @@ export function Checkbox({ label, ...rest }: Props){
     <label className="inline-flex items-center gap-2 cursor-pointer select-none text-sm text-gray-800">
       <input
         type="checkbox"
-        className="h-4 w-4 rounded-sm border-2 border-black text-black accent-black focus:ring-0"
+        className="h-4 w-4 rounded-sm border-2 border-black text-black "
         {...rest}
       />
       {label && <span>{label}</span>}

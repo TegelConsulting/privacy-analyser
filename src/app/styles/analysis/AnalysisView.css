@@ -19,11 +19,16 @@ body {
     background-color: #E2E8F0;
     border-radius: .6em;
     box-shadow: 4px 3px 3px #9f9f9f;
-    height: fit-content;
+    height: 13em;
     padding: 1em 1em 0 1em;
     max-width: 90vw;
 }
-.formContainer p {
+
+.form-container {
+    display: flex;
+    flex-direction: column; 
+}
+.form-container p {
     position: absolute;
     color: #000;
     top: 120px;
@@ -33,11 +38,15 @@ body {
     display: flex;
     width: 100%;
 }
-.analysisForm input {
-    width: 82%;
-    height: 100%;
+.input-container {
+    max-width: 1000px;
+}
+.input-container .urlInput {
+    width: 100%;              /* fyll hela containern */
+    box-sizing: border-box;   /* så padding inte spränger bredden */
+    font-size: clamp(14px, 2vw, 18px);   /* skalbar text */
+    padding: clamp(2px, 1.5vw);
     border-radius: .2em;
-    padding: 4px;
     background-color: #fff;
     box-shadow: 3px 3px 1px #9f9f9f;
     color: #000;
@@ -51,23 +60,29 @@ body {
     box-shadow: none
 }
 
-.analysisForm button {
+.form-container button {
     position: absolute;
-    right: 4%;
-    width: 13%;
+    top: 75%;
+    right: 15px;
+    height: 2.5em;
+    width: 6em;
     max-width: 90vw;
     background-color: #000;
     color: #fff;
     font-size: 0.8em;
-    padding: 5px;
-    border-radius: 0.8em;
+    border-radius: 1.5em;
     box-shadow: 2px 3px 1px #9f9f9f;
- 
+    white-space: nowrap;
+  
 }
-.analysisForm button:hover {
+.form-container button:hover {
     background-color: #fff;
     color: #000;
     box-shadow: none;
+}
+.input-container {
+    display: flex;
+    
 }
 .analysisView h1 {
     color: #000;
@@ -80,26 +95,31 @@ body {
 label {
     color: #000;
     font-size: 1.1em;
-    margin-left: 5px;
+    margin-left: 2%;
 }
 .form-mobile {
     display: none;
 }
-.clear-btn {
-    margin-left: 10px;
-    color: #000;
-}
-.clear-btn:hover {
-    color: #9f9f9f;
-}
-.checkboxes {
+
+.labels {
+    position: absolute;
     display: flex;
-    margin: 2.5em 1em 2.5em ;   
+    width: 87%;
+    margin: .5em ;
+    gap: 20%;   
+    justify-content: center;
 }
 .url {
     margin-left: -5px;
 }
-@media screen and (max-width: 980px) {
+@media screen and (max-width: 1224px) {
+    
+.form-container .urlInput {
+    position: relative;
+    width: 86%;
+}
+}
+@media screen and (max-width: 993px) {
     .analysisForm input {
         width: 78%;
     }
