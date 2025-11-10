@@ -24,11 +24,12 @@
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-icons": "^5.5.0",
-    "recharts": "^3.3.0",
+    "sharp": "^0.34.5",
     "zod": "^4.1.12"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@playwright/test": "^1.56.1",
     "@tailwindcss/postcss": "^4.1.16",
     "@types/bcrypt": "^6.0.0",
     "@types/bcryptjs": "^2.4.6",
