@@ -2,9 +2,6 @@
   "name": "privacy-analyser",
   "version": "0.1.0",
   "private": true,
-  "engines": {
-    "node": ">=20.x"
-  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -12,33 +9,19 @@
     "lint": "eslint"
   },
   "dependencies": {
-    "react-icons": "^5.5.0",
-    "@auth/mongodb-adapter": "^3.11.0",
-    "bcrypt": "^6.0.0",
-    "bcryptjs": "^3.0.2",
-    "framer-motion": "^12.23.24",
-    "lucide-react": "^0.546.0",
-    "mongodb": "^6.20.0",
-    "mongoose": "^8.19.1",
-    "next": "15.5.4",
-    "next-auth": "^5.0.0-beta.29",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "zod": "^4.1.12"
+    "next": "15.5.4"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
-    "@tailwindcss/postcss": "^4.1.16",
-    "@types/bcrypt": "^6.0.0",
-    "@types/bcryptjs": "^2.4.6",
+    "typescript": "^5",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "autoprefixer": "^10.4.21",
+    "@tailwindcss/postcss": "^4",
+    "tailwindcss": "^4",
     "eslint": "^9",
     "eslint-config-next": "15.5.4",
-    "postcss": "^8.5.6",
-    "tailwindcss": "^4.1.16",
-    "typescript": "^5"
+    "@eslint/eslintrc": "^3"
   }
 }
