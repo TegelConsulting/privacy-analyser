@@ -1,9 +1,10 @@
 import { Category_Label } from "@/lib/types/Category";
-import { Summary } from "@/lib/types/Summary";
-export const Summary_By_Category = (summary: Summary): Record<Category_Label, any> => ({
+import { FullSummary} from "@/lib/types/Summary";
+
+export const Summary_By_Category = (summary: FullSummary): Record<Category_Label, any> => ({
     gdpr: summary.gdpr,
     w3c: summary.w3c,
-    accessibility: summary.accessibillity,
+    accessibility: summary.accessibility,
     cookies: summary.cookies,
     scripts: summary.scripts,
     forms: summary.forms,

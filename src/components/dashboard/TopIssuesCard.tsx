@@ -1,7 +1,7 @@
 ﻿"use client";
 import { Card } from "@/components/ui/Card";
 import { AlertTriangle } from "lucide-react";
-import { issues } from "@/lib/mock/sum/cat/Category_Label";
+import { issues } from "@/lib/mock";
 
 export function TopIssuesCard() {
   return (

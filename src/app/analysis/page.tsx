@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useMemo, useState } from "react";
-import "@/app/styles/analysis/AnalysisView.css";
+import "../../app/styles/analysis/AnalysisView.css";
 import { Checkbox } from "@/components/ui/Checkbox";
 import { Button } from "@/components/ui/Button";
 import { ChartLine } from "@/components/analysis/ChartLine";
@@ -35,9 +35,9 @@ export default function Page() {
     if (!scan) return { filteredIssues: [], filteredSummaries: [] };
     return getFiltered(scan, selectedOrAll);
   }, [scan, selectedOrAll]);
-
-  const onSubmit: React.FormEventHandler = async (e) => {
+const onSubmit: React.FormEventHandler = async (e) => {
     e.preventDefault();
+    console.log("Submit triggered"); // Debug log
     setError(null);
 
     if (!/^https?:\/\//i.test(url)) {
@@ -47,9 +47,12 @@ export default function Page() {
 
     setLoading(true);
     try {
+      console.log("Fetching report for:", url); // Debug log
       const res = await getReportByUrl(url);
+      console.log("Got response:", res); // Debug log
       setScan(res);
-      setOpen(true); // öppna modal med resultat
+      setOpen(true);
+      console.log("Modal should open, open:", open); // Debug log
     } catch (err: any) {
       console.error(err);
       setScan(null);
