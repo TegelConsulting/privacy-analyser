@@ -1,0 +1,215 @@
+body {
+    background-color: #fff;
+    min-height: 100svh; 
+}
+
+.analysisView-container {
+    display: flex;
+    width: 100%;
+    margin-top: 10px;
+    align-items: center;
+    justify-content: center;
+}
+
+.analysisView {
+    position: relative;
+    font-family: 'Times New Roman', Times, serif;
+    width: 60%;
+    color: #0000;    
+    background-color: #E2E8F0;
+    border-radius: .6em;
+    box-shadow: 4px 3px 3px #9f9f9f;
+    height: 13em;
+    padding: 1em 1em 0 1em;
+    max-width: 90vw;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column; 
+}
+.form-container p {
+    position: absolute;
+    color: #000;
+    top: 120px;
+}
+.analysisForm {
+    position: absolute;
+    display: flex;
+    width: 100%;
+}
+.input-container {
+    max-width: 1000px;
+}
+.input-container .urlInput {
+    width: 100%;              /* fyll hela containern */
+    box-sizing: border-box;   /* så padding inte spränger bredden */
+    font-size: clamp(14px, 2vw, 18px);   /* skalbar text */
+    padding: clamp(2px, 1.5vw);
+    border-radius: .2em;
+    background-color: #fff;
+    box-shadow: 3px 3px 1px #9f9f9f;
+    color: #000;
+    max-width: 90vw;
+}
+.analysisForm input::placeholder {
+    color: #9f9f9f;
+}
+.analysisForm input:hover {
+    border: 1px solid #000;
+    box-shadow: none
+}
+
+.form-container button {
+    position: absolute;
+    top: 55%;
+    right: 15px;
+    height: 2.5em;
+    width: 6em;
+    max-width: 90vw;
+    background-color: #000;
+    color: #fff;
+    font-size: 0.8em;
+    border-radius: 1.5em;
+    box-shadow: 2px 3px 1px #9f9f9f;
+    white-space: nowrap;
+  
+}
+.form-container button:hover {
+    background-color: #fff;
+    color: #000;
+    box-shadow: none;
+}
+.input-container {
+    display: flex;
+    
+}
+.analysisView h1 {
+    color: #000;
+    font-size: 3em;
+    text-align: center;
+}
+.close-btn:hover {
+    background-color: #9f9f9f;
+}
+label {
+    color: #000;
+    font-size: 1.1em;
+    margin-left: 2%;
+}
+.form-mobile {
+    display: none;
+}
+
+.labels {
+    position: absolute;
+    display: flex;
+    width: 87%;
+    margin: .5em ;
+    gap: 20%;   
+    justify-content: center;
+}
+.url {
+    margin-left: -5px;
+}
+@media screen and (max-width: 1224px) {
+    
+.form-container .urlInput {
+    position: relative;
+    width: 86%;
+}
+}
+@media screen and (max-width: 993px) {
+    .analysisForm input {
+        width: 78%;
+    }
+    .analysisForm button {
+        width: 16%;
+    }
+}
+@media screen and (max-width: 800px) {
+   .analysisView {
+        width: 80%;
+        height: 100%;
+   }
+    .analysisForm {
+        width: 100%;
+    }
+    .analysisForm button {
+        width: 13%;
+        margin: 0 .5em;
+    }
+    .analysisForm input {
+        width: 80%;
+    }
+     .checkboxes {
+        display: flex;
+        } 
+}
+@media screen and (max-width: 728px) {
+   .analysisForm button {
+        width: 15%;
+        margin: 0 .8em;
+        white-space: nowrap;
+    }
+    .analysisForm input {
+        width: 78%;
+    }
+}
+@media screen and (max-width: 670px) {
+    .checkboxes {
+        display: flex;
+    }  
+     .analysisForm input {
+        width: 73%;    
+    }
+    
+    .analysisForm button {
+        width: 20%;
+        white-space: nowrap;
+    } 
+}
+@media screen and (max-width: 500px) {
+    span {
+        font-size: .9em;
+    }
+}
+@media screen and (max-width: 500px) {
+    .analysisView {
+        width: 80%;
+        height: auto;
+   }
+   .analysisView h1 {
+        font-size: 2em;
+   }
+    .labels {
+        display: flex;
+        flex-direction: column;
+    }
+    .checkboxes {
+        display: flex;
+        margin: 2.5em 0 9em;
+    }  
+     .analysisForm input {
+        width: 90%;    
+    }
+    
+    .analysisForm button {
+        width: 30%;
+        white-space: nowrap;
+        right: 30px;      
+        top: 35px;
+    } 
+    .formContainer p {
+        position: relative;
+        color: #000;
+        width: 90%;
+    }
+    .labels button {
+        position: relative;
+        right: 30px;
+    }
+    .label-container {
+        font-size: 1em;
+    }    
+}

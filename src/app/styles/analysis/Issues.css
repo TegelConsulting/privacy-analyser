@@ -1,0 +1,11 @@
+.issues .issue {
+     white-space: nowrap;
+}
+
+@media screen and (max-width: 590px) {
+.issues .issue {
+     white-space: wrap;
+     font-size: .9em;
+}
+
+}
