@@ -1,6 +1,8 @@
 "use client";
 
 import Hero from "@/components/Hero/Hero";
+import ReportList from "./reportcard/ReportList";
+import ReportButtons from "./reportcard/ReportButtons";
 
 export default function Home() {
   return (
@@ -11,6 +13,11 @@ export default function Home() {
         ctaText="Gör analys"
         ctaLink="/dashboard"
       />
+        <section className="flex flex-col items-center justify-center p-8 bg-gray-50 gap-6">
+        <h1 className="text-3xl font-bold">Analysrapport</h1>
+        <ReportList />
+        <ReportButtons />
+      </section>
     </main>
   );
 }
