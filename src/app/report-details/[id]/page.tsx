@@ -49,3 +49,4 @@ export default function ReportDetail({ params }: ReportDetailProps) {
     </main>
   );
 }
+ 
