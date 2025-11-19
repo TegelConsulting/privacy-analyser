@@ -10,12 +10,25 @@ export default function ReportDetail({ params }: ReportDetailProps) {
   const report = mockReports.find((r) => r.id === params.id);
 
   if (!report) {
-    return (
-      <main className="min-h-screen flex items-center justify-center">
-        <p className="text-red-600 text-lg">Analysen kunde inte hittas.</p>
-      </main>
-    );
-  }
+  return (
+    <main className="min-h-screen flex items-center justify-center bg-gray-50">
+      <div className="bg-white p-8 rounded-xl shadow-md text-center space-y-4 max-w-sm">
+        <h2 className="text-xl font-semibold text-gray-800">Analysen kunde inte hittas</h2>
+        <p className="text-gray-500">
+          Den här analysen verkar saknas eller har tagits bort.
+        </p>
+
+        {/* Placeholder button - no link yet */}
+        <button
+          className="mt-4 px-4 py-2 bg-gray-800 text-white rounded-md hover:bg-gray-700 transition"
+        >
+          Tillbaka till historik
+        </button>
+      </div>
+    </main>
+  );
+}
+
 
   return (
     <main className="min-h-screen bg-gray-50 p-8 flex justify-center">
