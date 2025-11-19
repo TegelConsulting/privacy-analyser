@@ -1,4 +1,4 @@
-﻿import type { Issue, Report, Summary } from "./types";
+import type { Issue, Report, Summary } from "./types";
 
 export const summary: Summary = { gdpr: 35, w3c: 67, accessibility: 13 };
 export const issues: Issue[] = [

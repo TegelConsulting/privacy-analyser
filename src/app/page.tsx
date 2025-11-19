@@ -1,11 +1,8 @@
-// import { connectToDatabase } from "./lib/mongodb";
-import Hero from "../components/Hero/Hero";
-import Image from "next/image";
+"use client";
 
-export default async function Home() {
-  // Connect to MongoDB (server-side only)
-  // await connectToDatabase();
+import Hero from "@/components/Hero/Hero";
 
+export default function Home() {
   return (
     <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
@@ -25,7 +22,7 @@ export default async function Home() {
           ctaText="Gör analys"
           ctaLink="/dashboard"
         />
-
+        
         <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
           <li className="mb-2 tracking-[-.01em]">
             Get started by editing{" "}
@@ -40,5 +37,13 @@ export default async function Home() {
         </ol>
       </main>
     </div>
+    <main className="bg-white">
+      <Hero
+        title="Optimera din webbsida"
+        subtitle="Upptäck GDPR-brister, tillgänglighetsproblem och kodfel på bara några sekunder. Få en tydlig rapport med konkreta förbättringsförslag – snabbt och automatiserat."
+        ctaText="Gör analys"
+        ctaLink="/dashboard"
+      />
+    </main>
   );
 }

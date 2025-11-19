@@ -1,25 +1,37 @@
-﻿"use client";
+﻿// src/app/dashboard/page.tsx
+"use client";
 
+import IntroBanner from "@/components/dashboard/IntroBanner";
 import { QuickScanCard } from "@/components/dashboard/QuickScanCard";
 import { SummaryCard } from "@/components/dashboard/SummaryCard";
 import { TopIssuesCard } from "@/components/dashboard/TopIssuesCard";
 import { RecentReportsCard } from "@/components/dashboard/RecentReportsCard";
+import PricingCTA from "@/components/ui/PricingCTA";
 
 export default function DashboardPage() {
   return (
-    <div className="pb-10"> {/* extra luft före footern, layouten lämnas orörd */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
-        {/* Vänster kolumn */}
-        <div className="lg:col-span-2 space-y-6">
-          <QuickScanCard />
-          <SummaryCard />
-        </div>
+    <div className="bg-white text-slate-900 min-h-screen pt-20 pb-24">
+      <div className="mx-auto max-w-6xl px-6">
+        {/* Topp: logga + infobox */}
+        <IntroBanner />
 
-        {/* Höger kolumn */}
-        <aside className="space-y-6">
-          <TopIssuesCard />
-          <RecentReportsCard />
-        </aside>
+        {/* 12-kolumners grid */}
+        <div className="grid gap-6 lg:grid-cols-12">
+          {/* Vänster 8 kol */}
+          <div className="lg:col-span-8 space-y-6">
+            {/* Lägg INTE extra border/padding här om dina komponenter redan har card-stil */}
+            <QuickScanCard />
+            <SummaryCard />
+          </div>
+
+          {/* Höger 4 kol */}
+          <aside className="lg:col-span-4 space-y-6">
+            {/* INTE h-full här – annars blir det en gigantisk låda */}
+            <PricingCTA />
+            <TopIssuesCard />
+            <RecentReportsCard />
+          </aside>
+        </div>
       </div>
     </div>
   );
