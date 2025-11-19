@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { chromium } from "playwright";
-import { connectDB } from "@/lib/mongodb";
+import { connectDB } from "@/mongodb";
 import { Scan } from "@/models/Scan";
 
 export async function POST(req: Request) {
