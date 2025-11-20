@@ -11,15 +11,11 @@ interface HeroProps {
   ctaLink: string;
 }
 
-/**
- * Hero utan fullskärms-centrering.
- * Ligger nära toppen, med lagom vertikal padding.
- * Grid på två kolumner, responsiv.
- */
 export default function Hero({ title, subtitle, ctaText, ctaLink }: HeroProps) {
   return (
     <section className="w-full bg-white">
       <div className="mx-auto max-w-7xl px-6 md:px-16 py-16 md:py-24 grid gap-12 md:gap-16 md:grid-cols-2 items-center">
+        
         {/* Vänster sida — text och knappar */}
         <motion.div
           className="text-left space-y-8"
@@ -60,7 +56,7 @@ export default function Hero({ title, subtitle, ctaText, ctaLink }: HeroProps) {
         >
           <div className="w-full max-w-[520px]">
             <Image
-              src="/images/hero/hero-illustration.png" // byt till robot om du vill: import robot from "@/app/assets/logo/robot.svg"
+              src="/images/hero/hero-illustration.png"
               alt="Illustration av webbanalys"
               width={520}
               height={520}
