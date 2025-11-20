@@ -2,6 +2,7 @@
 
 export type PlanSlug = "free" | "medium" | "pro";
 
+
 export type PaymentPlan = {
   slug: PlanSlug;
   title: string;

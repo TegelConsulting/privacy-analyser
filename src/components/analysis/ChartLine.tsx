@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Filter_Label } from "@/lib/types/Filter_Label";
+import { Filter_Label } from "@/lib/types/Filter/Filter_Label";
 import { FilterList } from "@/lib/mock/sum-cat/FilterLabels";
 import "../../app/styles/analysis/ChartLine.css";
 

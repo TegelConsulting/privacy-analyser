@@ -1,6 +1,6 @@
 import { Category_Label } from "./Category";
-import { Issue } from "./Issue"
-import { Report as AnalysisReport } from "./Report";
+import { Issue } from "@/lib/types"; 
+import { Report as AnalysisReport } from "@/lib/types"; 
 
 export type FilteredData = {
     filteredIssues: Issue[];

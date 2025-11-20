@@ -1,12 +1,16 @@
+"use client";
 // src/app/betalmodeller/page.tsx
-import PricingCard from "@/components/pricing/PricingCard";
+import { PricingCard } from "@/components/pricing/PricingCard";
 import { PAYMENT_PLANS } from "@/lib/paymentModels";
 import Image from "next/image";
 import robot from "@/app/assets/logo/robot.svg";
+import { useState } from "react";
 
-export const metadata = { title: "Betalmodeller" };
+const metadata = { title: "Betalmodeller" };
 
 export default function PricingPage() {
+  const [selectedPrice, setSelectedPrice] = useState<string>("");
+
   return (
     <section className="bg-white">
       <div className="mx-auto max-w-6xl px-4 py-14">
@@ -16,7 +20,13 @@ export default function PricingPage() {
 
         <div className="mt-10 grid gap-6 md:grid-cols-3">
           {PAYMENT_PLANS.map((p) => (
-            <PricingCard key={p.slug} plan={p} />
+            <PricingCard
+              title={p.title} 
+              price={p.priceLabel}
+              key={p.slug} 
+              plan={p} 
+              setPrice={setSelectedPrice}
+            />
           ))}
         </div>
 

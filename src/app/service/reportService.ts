@@ -1,4 +1,4 @@
-import { ScanResult } from "@/lib/types/ScanResult";
+import { ScanResult } from "@/lib/types/Result/ScanResult";
 
 /** ===== Mock API (guarantees stats/id) ===== */
 export async function getReportByUrl(targetUrl: string): Promise<ScanResult> {
