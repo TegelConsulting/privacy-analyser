@@ -1,23 +1,18 @@
-"use client";
+'use client';
 
-import Hero from "@/components/Hero/Hero";
-import ReportList from "./reportcard/ReportList";
-import ReportButtons from "./reportcard/ReportButtons";
+import Hero from '@/components/Hero/Hero';
 
 export default function Home() {
   return (
-    <main className="bg-white">
-      <Hero
-        title="Optimera din webbsida"
-        subtitle="Upptäck GDPR-brister, tillgänglighetsproblem och kodfel på bara några sekunder. Få en tydlig rapport med konkreta förbättringsförslag – snabbt och automatiserat."
-        ctaText="Gör analys"
-        ctaLink="/dashboard"
-      />
-        <section className="flex flex-col items-center justify-center p-8 bg-gray-50 gap-6">
-        <h1 className="text-3xl font-bold">Analysrapport</h1>
-        <ReportList />
-        <ReportButtons />
-      </section>
-    </main>
+    <div className='font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20'>
+      <main className='flex flex-col gap-8 row-start-2 items-center sm:items-start'>
+        <Hero
+          title='Optimera din webbsida'
+          subtitle='Upptäck GDPR-brister, tillgänglighetsproblem och kodfel på bara några sekunder. Få en tydlig rapport med konkreta förbättringsförslag – snabbt och automatiserat.'
+          ctaText='Gör analys'
+          ctaLink='/dashboard'
+        />
+      </main>
+    </div>
   );
 }

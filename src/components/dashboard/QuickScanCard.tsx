@@ -21,7 +21,7 @@ export function QuickScanCard() {
         {/* vänster: kryss, höger: knapp – robust även responsivt */}
         <div className="grid grid-cols-1 sm:grid-cols-[1fr_auto] sm:items-center gap-3">
           <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
-            <Checkbox label="GDPR" defaultChecked />
+            <Checkbox label="GDPR" />
             <Checkbox label="W3C" />
             <Checkbox label="Accessibility" />
           </div>
