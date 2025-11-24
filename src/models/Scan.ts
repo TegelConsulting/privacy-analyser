@@ -14,6 +14,11 @@ const ScanSchema = new Schema(
       },
     ],
     durationMs: Number,
+    aiSummary: String,
+    aiPrivacyConcerns: Array,
+    aiSecurityIssues: Array,
+    aiGdprCompliance: Object,
+    aiTimestamp: String,
   },
   { timestamps: true }
 );
