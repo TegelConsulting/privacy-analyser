@@ -1,5 +1,5 @@
 // lib/mock/sum-cat/buildSummary.ts
-import type { SummaryStr } from "@/lib/types/Category";
+import type { SummaryStr } from "@/lib/types/Filter/Category";
 import type { ScanResult } from "@/lib/types/ScanResult";
 
 type Keys = "gdpr" | "w3c" | "accessibility";

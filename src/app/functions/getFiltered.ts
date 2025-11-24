@@ -1,8 +1,8 @@
 export const ALL_FILTERS = ["gdpr","w3c","accessibility"] as const;
 import { FilterList } from "@/lib/mock/sum-cat/FilterLabels";
-import { Filter_Label } from "@/lib/types/Filter_Label";
-import { IssueAdapter } from "@/lib/types/IssueAdapter";
-import { ScanResult } from "@/lib/types/ScanResult";
+import { Filter_Label } from "@/lib/types/Filter/Filter_Label";
+import { IssueAdapter } from "@/lib/types/Result/IssueAdapter";
+import { ScanResult } from "@/lib/types/Result/ScanResult";
 
 
 export function getFiltered(scan: ScanResult, selected: Filter_Label[]) {

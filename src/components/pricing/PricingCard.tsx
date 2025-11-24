@@ -4,10 +4,40 @@ import Link from "next/link";
 import { cn } from "@/lib/cn";
 import type { PaymentPlan } from "@/lib/paymentModels";
 import { Button } from "@/components/ui/Button";
+import { useRouter, useSearchParams } from "next/navigation";
+import React, { useState } from "react";
+import { Filter_Label } from "@/lib/types/Filter/Filter_Label";
 
-type Props = { plan: PaymentPlan; className?: string };
+type PricingCardProps = { 
+  plan: PaymentPlan;
+  title: string;
+  price: string;
+  setPrice: (price: string) => void;
+};
 
-export default function PricingCard({ plan, className }: Props) {
+export const PricingCard: React.FC<PricingCardProps> = ({ 
+  plan,
+  price, 
+  setPrice 
+}) => {
+
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  const url = searchParams.get("url") ?? "";
+  const filterParam = searchParams.get("filter") ?? ""; 
+
+  const filters: Filter_Label[] = filterParam
+    ? (filterParam.split(",").filter(Boolean) as Filter_Label[])
+    : [];
+
+  const handleChoosePrice = () => {
+    setPrice(price);
+
+
+    router.push(`/betalmodeller/${plan.slug}`)
+  }
+
   return (
     <article
       className={cn(
@@ -15,8 +45,7 @@ export default function PricingCard({ plan, className }: Props) {
         "min-h-[440px]", // jämna höjder
         plan.recommended
           ? "border-blue-400 ring-2 ring-blue-400/40 bg-blue-50/40"
-          : "border-slate-300 hover:border-blue-200",
-        className
+          : "border-slate-300 hover:border-blue-200"
       )}
     >
       {/* Blå badge upptill om rekommenderad */}
@@ -36,9 +65,8 @@ export default function PricingCard({ plan, className }: Props) {
 
       <div className="mt-6">
         <span className="text-3xl font-semibold text-slate-900">
-          {plan.priceLabel.replace("/mån", "")}
+          {price}
         </span>
-        <span className="ml-1 align-top text-[11px] text-slate-500">/mån</span>
       </div>
 
       {/* Blå pilla */}
@@ -59,17 +87,16 @@ export default function PricingCard({ plan, className }: Props) {
 
       {/* CTA-knapp längst ner */}
       <div className="mt-auto pt-6">
-        <Link href={`/betalmodeller/${plan.slug}`}>
           <Button
             variant="primary"
             className={cn(
               "rounded-md bg-slate-900 text-white hover:bg-black",
               plan.recommended && "bg-blue-600 hover:bg-blue-700"
             )}
+            onClick={handleChoosePrice}
           >
             Välj abonnemang
           </Button>
-        </Link>
       </div>
     </article>
   );
