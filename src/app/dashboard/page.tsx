@@ -1,11 +1,11 @@
-﻿// src/app/dashboard/page.tsx
-"use client";
+﻿"use client";
 
 import IntroBanner from "@/components/dashboard/IntroBanner";
 import { QuickScanCard } from "@/components/dashboard/QuickScanCard";
 import { SummaryCard } from "@/components/dashboard/SummaryCard";
 import { TopIssuesCard } from "@/components/dashboard/TopIssuesCard";
 import { RecentReportsCard } from "@/components/dashboard/RecentReportsCard";
+import { AIAnalysisCard } from "@/components/dashboard/AIAnalysisCard";
 import PricingCTA from "@/components/ui/PricingCTA";
 
 export default function DashboardPage() {
@@ -22,6 +22,7 @@ export default function DashboardPage() {
             {/* Lägg INTE extra border/padding här om dina komponenter redan har card-stil */}
             <QuickScanCard />
             <SummaryCard />
+            <AIAnalysisCard />
           </div>
 
           {/* Höger 4 kol */}
