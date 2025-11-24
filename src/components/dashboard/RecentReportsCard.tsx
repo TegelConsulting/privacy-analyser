@@ -1,5 +1,6 @@
 ﻿"use client";
 
+import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/Card";
 import { Download } from "lucide-react";
 import { reports } from "@/lib/mock/Report";
@@ -13,6 +14,12 @@ function domainOf(url: string) {
 }
 
 export function RecentReportsCard() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const items = reports.slice(0, 3);
 
   return (
@@ -30,10 +37,13 @@ export function RecentReportsCard() {
             </div>
 
             <div className="shrink-0 text-right">
-              {/* Hydration-safe date */}
-              <div className="text-[11px] text-gray-500">
-                {new Date(r.date).toLocaleDateString("sv-SE")}
-              </div>
+              {mounted ? (
+                <div className="text-[11px] text-gray-500">
+                  {new Date(r.date).toLocaleDateString("sv-SE")}
+                </div>
+              ) : (
+                <div className="text-[11px] text-gray-500">…</div>
+              )}
               <a
                 href="#"
                 className="pa-dlbtn mt-1"
