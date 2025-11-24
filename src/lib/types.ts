@@ -47,3 +47,12 @@ export interface ScanResult {
   forms: FormInfo[];
   error?: string;
 }
+
+
+// AI Analysen
+export interface AIResponse {
+  overview: string;
+  risks_and_weaknesses: string[];
+  recommendations: string[];
+  sources?: string[];
+}
