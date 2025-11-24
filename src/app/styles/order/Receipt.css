@@ -1,0 +1,15 @@
+.desc {
+     font-size: clamp(10px, 2vw, 12px);   /* skalbar text */
+
+}
+@media screen and (max-width: 768px) {
+    .order-confirmation {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .plan {
+        width: 100%;
+        max-width: 35rem;
+    }
+}

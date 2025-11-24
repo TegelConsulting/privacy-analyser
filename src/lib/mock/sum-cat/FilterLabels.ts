@@ -1,4 +1,4 @@
-import type { Filter_Label } from "@/lib/types/Filter_Label";
+import type { Filter_Label } from "@/lib/types/Filter/Filter_Label";
 
 /** ===== Mock data/labels ===== */
 export const FilterList: Record<Filter_Label, string> = {

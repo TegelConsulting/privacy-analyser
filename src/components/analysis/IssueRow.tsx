@@ -1,6 +1,6 @@
 import { FilterList } from "@/lib/mock/sum-cat/FilterLabels";
-import type { Filter_Label } from "@/lib/types/Filter_Label";
-import { IssueAdapter } from "@/lib/types/IssueAdapter";
+import type { Filter_Label } from "@/lib/types/Filter/Filter_Label";
+import { IssueAdapter } from "@/lib/types/Result/IssueAdapter";
 import { SeverityBadge } from "./SeverityBadge";
 
 export const IssueRow: React.FC<{ issue: IssueAdapter }> = ({ issue }) => {
@@ -26,12 +26,17 @@ export const IssueRow: React.FC<{ issue: IssueAdapter }> = ({ issue }) => {
 
   return (
     <li className="issue list-item p-1">
-      <section className="issue-container flex flex-wrap items-center gap-2">
-        <label className="font-semibold">{prefix}</label>
-        <label>{issue.title} ·</label>
-        <label className="severity text-gray-500">
-          Allvarsnivå: <SeverityBadge severity={severity} /> · {rightMetric}
-        </label>
+      <section className="issue-container flex">
+        <section className="w-1/6">
+          <label className="font-semibold">
+            {prefix}:
+          </label>
+        </section>
+        <section >
+          <label className="severity text-gray-500">
+            Allvarsnivå: <SeverityBadge severity={severity} /> · {rightMetric}
+          </label>
+        </section>
       </section>
     </li>
   );

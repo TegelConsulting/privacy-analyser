@@ -1,5 +1,5 @@
-import { CookieInfo } from "./CookieInfo";
-import { FormInfo } from "./FormInfo";
+import { CookieInfo } from "../Form/CookieInfo";
+import { FormInfo } from "../Form/FormInfo"; 
 import { ScriptInfo } from "./ScriptInfo";
 
 export interface ScanResult {
