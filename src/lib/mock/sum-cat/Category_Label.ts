@@ -1,4 +1,4 @@
-﻿import type { Category_Label } from "@/lib/types/Category";
+﻿import type { Category_Label } from "@/lib/types/Filter/Category";
 
 export const CategoryList: Record<Category_Label, string> = {
   w3c: "W3C",

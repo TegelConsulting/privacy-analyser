@@ -1,4 +1,4 @@
-import type { SummaryNum } from "@/lib/types/Category";
+import type { SummaryNum } from "@/lib/types/Filter/Category";
 import type { IssueAdapter } from "@/lib/types/IssueAdapter";
 
 export function toIssueFromSummary(

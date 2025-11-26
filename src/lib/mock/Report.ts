@@ -1,4 +1,4 @@
-import { Category_Label } from "../types/Category"; 
+import { Category_Label } from "../types/Filter/Category"; 
 import { Report as AnalysisReport } from "../types/Report";
 
 export const reports: AnalysisReport[] = [

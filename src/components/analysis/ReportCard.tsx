@@ -10,7 +10,7 @@ type ReportCardProps = {
 export const ReportCard: React.FC<ReportCardProps> = ({label, value}) => {
     return (
         <section className="reportCard pt-2">
-            <label>{label}</label>
+            <label className="font-semibold">{label}</label>
         </section>
     )
 }
