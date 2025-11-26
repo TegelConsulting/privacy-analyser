@@ -10,24 +10,22 @@ import PricingCTA from "@/components/ui/PricingCTA";
 
 export default function DashboardPage() {
   return (
-    <div className="bg-white text-slate-900 min-h-screen pt-20 pb-24">
-      <div className="mx-auto max-w-6xl px-6">
-        {/* Topp: logga + infobox */}
+    <div className="bg-slate-50 text-slate-900 min-h-screen pt-24 pb-24">
+      <div className="mx-auto max-w-6xl px-6 space-y-8">
+        {/* Header / Intro – är redan ett “kort” i själva komponenten */}
         <IntroBanner />
 
-        {/* 12-kolumners grid */}
-        <div className="grid gap-6 lg:grid-cols-12">
-          {/* Vänster 8 kol */}
-          <div className="lg:col-span-8 space-y-6">
-            {/* Lägg INTE extra border/padding här om dina komponenter redan har card-stil */}
+        {/* 12-kolumners layout för resten av dashboarden */}
+        <div className="grid gap-8 lg:grid-cols-12">
+          {/* Vänster kolumn: snabbanalys + översikt */}
+          <div className="lg:col-span-8 space-y-8">
             <QuickScanCard />
             <SummaryCard />
             <AIAnalysisCard />
           </div>
 
-          {/* Höger 4 kol */}
-          <aside className="lg:col-span-4 space-y-6">
-            {/* INTE h-full här – annars blir det en gigantisk låda */}
+          {/* Höger kolumn: abonnemang + issues + senaste rapporter */}
+          <aside className="lg:col-span-4 space-y-8">
             <PricingCTA />
             <TopIssuesCard />
             <RecentReportsCard />

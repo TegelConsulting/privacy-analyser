@@ -1,5 +1,21 @@
-/* =========================================================
-   Tailwind import
-   ========================================================= */
 @import "tailwindcss";
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Grund för hela appen */
+body {
+  @apply bg-slate-50 text-slate-900 antialiased;
+}
+
+/* Inputen vi använder i Snabbanalys */
+.pa-input {
+  @apply w-full rounded-lg border border-slate-300 bg-white px-3 py-2 text-sm shadow-sm
+  placeholder:text-slate-400
+  focus:outline-none focus:ring-2 focus:ring-black focus:border-black;
+}
+
+.pa-input--lg {
+  @apply py-3 text-base;
+}

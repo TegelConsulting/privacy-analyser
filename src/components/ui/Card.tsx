@@ -1,13 +1,9 @@
-﻿"use client";
-import * as React from "react";
-
-type CardProps = { title?: string; className?: string; children: React.ReactNode };
-
-export function Card({ title, className = "", children }: CardProps) {
+﻿// src/components/ui/Card.tsx
+export function Card({ title, children }: { title?: string; children: React.ReactNode }) {
   return (
-    <div className={`pa-card ${className}`}>
-      {title ? <div className="pa-card-header">{title}</div> : null}
-      <div className="pa-card-content">{children}</div>
+    <div className="rounded-2xl bg-white border border-slate-200 shadow-sm p-6">
+      {title && <h2 className="text-lg font-semibold mb-4">{title}</h2>}
+      {children}
     </div>
   );
 }

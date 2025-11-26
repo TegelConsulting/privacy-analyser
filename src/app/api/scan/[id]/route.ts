@@ -1,38 +1,31 @@
+// src/app/api/scan/[id]/route.ts
 import { NextResponse } from "next/server";
 import mongoose from "mongoose";
-import { Scan } from "@/models/Scan";
 import { connectDB } from "@/mongodb";
+import { Scan } from "@/models/Scan";
 
-export async function GET(
-  req: Request,
-  { params }: { params: { id: string } }
-) {
+type RouteParams = { params: { id: string } };
+
+export async function GET(_req: Request, { params }: RouteParams) {
   try {
     await connectDB();
 
     const { id } = params;
-
     if (!mongoose.Types.ObjectId.isValid(id)) {
-      return NextResponse.json(
-        { error: "Invalid scan ID" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Ogiltigt scan-ID" }, { status: 400 });
     }
 
-    const scan = await Scan.findById(id);
-
+    const scan = await Scan.findById(id).lean();
     if (!scan) {
-      return NextResponse.json(
-        { error: "Scan report not found" },
-        { status: 404 }
-      );
+      return NextResponse.json({ error: "Scan hittades inte" }, { status: 404 });
     }
 
     return NextResponse.json(scan, { status: 200 });
-  } catch (error: any) {
-    console.error("GET /api/scan/:id error:", error);
+  } catch (err: unknown) {
+    const details = err instanceof Error ? err.message : String(err);
+    console.error("GET /api/scan/[id] error:", details);
     return NextResponse.json(
-      { error: "Failed to load scan report", details: error.message },
+      { error: "Internt serverfel", details },
       { status: 500 }
     );
   }
