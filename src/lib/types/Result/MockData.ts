@@ -1,6 +1,6 @@
 import { IssueAdapter } from "./IssueAdapter"; 
 import { Report as AnalysisReport } from "./Report";
-import { Summary } from "./Summary";
+import { Summary } from "@/lib/types";
 
 export type MockData = {
     issues: IssueAdapter[]; 

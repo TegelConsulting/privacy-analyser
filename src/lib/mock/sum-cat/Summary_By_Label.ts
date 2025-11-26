@@ -1,4 +1,4 @@
-import type { Category_Label, ByCat } from "@/lib/types/Category";
+import type { Category_Label, ByCat } from "@/lib/types/Filter/Category";
 
 /**
  * Gör funktionen generisk så att in-typ = ut-typ.

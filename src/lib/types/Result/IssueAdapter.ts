@@ -1,4 +1,4 @@
-import { Filter_Label } from "./Filter_Label";
+import { Filter_Label } from "../Filter/Filter_Label";
 
 
 // Justera typ om din riktiga IssueAdapter skiljer sig

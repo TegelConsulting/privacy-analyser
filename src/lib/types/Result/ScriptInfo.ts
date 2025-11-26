@@ -1,4 +1,4 @@
-import { Category_Label } from "./Category";  
+import { Category_Label } from "./Filter/Category";  
 export interface ScriptInfo {
   src: string | null;
   type: string | null;

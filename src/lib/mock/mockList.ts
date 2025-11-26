@@ -1,4 +1,4 @@
-import { ScanResult } from "../types/ScanResult";
+import { ScanResult } from "../types/Result/ScanResult";
 
 
 export const mockScans: ScanResult[] = [

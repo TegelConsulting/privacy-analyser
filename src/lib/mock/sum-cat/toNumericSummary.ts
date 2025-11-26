@@ -1,4 +1,4 @@
-import type { Category_Label, SummaryNum, SummaryStr } from "@/lib/types/Category";
+import type { Category_Label, SummaryNum, SummaryStr } from "@/lib/types/Filter/Category";
 
 // Generisk sträng→nummer-konverterare som bevarar nycklarna
 export const toNumericSummary = <K extends Category_Label>(

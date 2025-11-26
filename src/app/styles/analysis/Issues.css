@@ -1,5 +1,5 @@
 .issues .issue {
-     white-space: nowrap;
+     width: 100%;
 }
 
 @media screen and (max-width: 590px) {

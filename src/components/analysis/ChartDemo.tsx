@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { ChartLine } from "./ChartLine";
-import { Filter_Label } from "@/lib/types/Filter_Label";
+import { Filter_Label } from "@/lib/types/Filter/Filter_Label";
 
 type ScanResultMock = {
   stats: { gdpr: number; w3c: number; accessibility: number }; // 0–100
