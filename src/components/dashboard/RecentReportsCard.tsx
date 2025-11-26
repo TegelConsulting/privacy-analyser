@@ -1,13 +1,25 @@
 ﻿"use client";
+
+import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/Card";
 import { Download } from "lucide-react";
 import { reports } from "@/lib/mock/Report";
 
 function domainOf(url: string) {
-  try { return new URL(url).hostname.replace(/^www\./, ""); } catch { return url; }
+  try {
+    return new URL(url).hostname.replace(/^www\./, "");
+  } catch {
+    return url;
+  }
 }
 
 export function RecentReportsCard() {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const items = reports.slice(0, 3);
 
   return (
@@ -25,8 +37,19 @@ export function RecentReportsCard() {
             </div>
 
             <div className="shrink-0 text-right">
-              <div className="text-[11px] text-gray-500">{r.date.toLocaleDateString()}</div>
-              <a href="#" className="pa-dlbtn mt-1" aria-label="Ladda ner PDF" title="Ladda ner">
+              {mounted ? (
+                <div className="text-[11px] text-gray-500">
+                  {new Date(r.date).toLocaleDateString("sv-SE")}
+                </div>
+              ) : (
+                <div className="text-[11px] text-gray-500">…</div>
+              )}
+              <a
+                href="#"
+                className="pa-dlbtn mt-1"
+                aria-label="Ladda ner PDF"
+                title="Ladda ner"
+              >
                 <Download size={14} strokeWidth={1.6} className="text-gray-700" />
               </a>
             </div>
