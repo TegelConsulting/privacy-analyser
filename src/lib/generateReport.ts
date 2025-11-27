@@ -38,47 +38,47 @@ export async function generateReport(
     console.log('Scan timestamp:', scanResult.timestamp);
 
     // Prepare the prompt with scan data
-    const prompt = `You are a privacy and security analyst. Analyze the following website scan results and respond ONLY with valid JSON in the exact format specified below.
+    const prompt = `Du är en integritets- och säkerhetsanalytiker. Analysera följande webbplatsskanningsresultat och svara ENDAST med giltig JSON i exakt det format som specificeras nedan. Svara på SVENSKA.
 
-Website URL: ${scanResult.url}
-Scan Date: ${scanResult.timestamp}
+Webbplats-URL: ${scanResult.url}
+Skanning datum: ${scanResult.timestamp}
 
-COOKIES DETECTED (${scanResult.cookies.length}):
+COOKIES UPPTÄCKTA (${scanResult.cookies.length}):
 ${JSON.stringify(scanResult.cookies, null, 2)}
 
-SCRIPTS DETECTED (${scanResult.scripts.length}):
+SKRIPT UPPTÄCKTA (${scanResult.scripts.length}):
 ${JSON.stringify(scanResult.scripts, null, 2)}
 
-FORMS DETECTED (${scanResult.forms.length}):
+FORMULÄR UPPTÄCKTA (${scanResult.forms.length}):
 ${JSON.stringify(scanResult.forms, null, 2)}
 
-${scanResult.error ? `SCAN ERROR: ${scanResult.error}` : ''}
+${scanResult.error ? `SKANNINGSFEL: ${scanResult.error}` : ''}
 
-Respond with a JSON object in this EXACT format:
+Svara med ett JSON-objekt i detta EXAKTA format (på svenska):
 {
-  "summary": "Brief overview of all findings (2-3 sentences)",
+  "summary": "Kort översikt av alla fynd (2-3 meningar på svenska)",
   "privacyConcerns": [
     {
-      "issue": "Description of the privacy concern",
+      "issue": "Beskrivning av integritetsproblemet på svenska",
       "priority": "High" | "Medium" | "Low",
-      "recommendation": "Specific actionable recommendation to address this issue"
+      "recommendation": "Specifik åtgärdbar rekommendation för att åtgärda detta problem på svenska"
     }
   ],
   "securityIssues": [
     {
-      "issue": "Description of the security issue",
+      "issue": "Beskrivning av säkerhetsproblemet på svenska",
       "priority": "High" | "Medium" | "Low",
-      "recommendation": "Specific actionable recommendation to fix this"
+      "recommendation": "Specifik åtgärdbar rekommendation för att åtgärda detta på svenska"
     }
   ],
   "gdprCompliance": {
-    "compliant": true or false,
-    "issues": ["List of GDPR compliance issues found"],
-    "recommendations": ["List of specific GDPR compliance recommendations"]
+    "compliant": true eller false,
+    "issues": ["Lista över GDPR-efterlevnadsproblem som hittats på svenska"],
+    "recommendations": ["Lista över specifika GDPR-efterlevnadsrekommendationer på svenska"]
   }
 }
 
-Important: Return ONLY the JSON object, no markdown formatting or additional text.`;
+Viktigt: Returnera ENDAST JSON-objektet på SVENSKA, ingen markdown-formatering eller ytterligare text.`;
 
     console.log('📤 Sending request to OpenAI API...');
 
@@ -89,7 +89,7 @@ Important: Return ONLY the JSON object, no markdown formatting or additional tex
         {
           role: 'system',
           content:
-            'You are an expert privacy and security analyst specializing in GDPR compliance, web security, and data protection best practices. Always respond with valid JSON only, no markdown or extra text.',
+            'Du är en expert på integritets- och säkerhetsanalys med specialisering på GDPR-efterlevnad, webbsäkerhet och bästa praxis för dataskydd. Svara alltid på SVENSKA med endast giltig JSON, ingen markdown eller extra text.',
         },
         {
           role: 'user',
