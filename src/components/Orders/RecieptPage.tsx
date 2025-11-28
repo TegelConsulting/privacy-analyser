@@ -32,7 +32,7 @@ type Props = {
 };
 
 export default function RecieptPage({ plan, method }: Props) {
-  const { targetUrl, selectedFilters, setSelectedFilters } = useAppStore();
+  const { targetUrl, selectedFilters, setSelectedFilters, slug} = useAppStore();
   const [scan, setScan] = useState<ScanResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -59,7 +59,6 @@ export default function RecieptPage({ plan, method }: Props) {
         typeof valueOrUpdater === "function"
           ? (valueOrUpdater as (p: Filter_Label[]) => Filter_Label[])(prev)
           : valueOrUpdater
-        
     )
     }
 
@@ -168,7 +167,6 @@ export default function RecieptPage({ plan, method }: Props) {
           scan={scan}
           selected={selected}
           onSelectedChange={handleSelectChange}
-          slug={plan.slug}
         />
       </Modal>
     </section>

@@ -1,11 +1,6 @@
 export type Label = {
-  gdpr: string;
-  w3c: string;
-  accessibility: string;
+  gdpr: number;
+  w3c: number;
+  accessibility: number;
 }
-export type Filter_Label = 
-  "gdpr" 
-  | "w3c" 
-  | "accessibility" 
-;
-
+export type Filter_Label = "gdpr" | "w3c" | "accessibility";

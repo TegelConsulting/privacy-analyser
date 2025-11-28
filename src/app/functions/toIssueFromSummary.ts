@@ -1,5 +1,5 @@
 import type { SummaryNum } from "@/lib/types/Filter/Category";
-import type { IssueAdapter } from "@/lib/types/IssueAdapter";
+import type { IssueAdapter } from "@/lib/types/Result/IssueAdapter";
 
 export function toIssueFromSummary(
   host: string,

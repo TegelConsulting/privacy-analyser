@@ -1,31 +1,48 @@
-"use Client"
+"use Client"// src/hooks/useAppStore.ts
 import { create } from "zustand";
 import { persist, createJSONStorage } from "zustand/middleware";
 import type { AppState } from "@/lib/types/AppState";
-import type { ScanStatus } from "@/lib/types/Scan/ScanStatus";
-import { ScanSlice } from "@/lib/types/Scan/ScanSlice";
 import type { Filter_Label } from "@/lib/types/Filter/Filter_Label";
 import type { PaymentStatus } from "@/lib/types/Payment/PaymentStatus";
+import type { Order } from "@/lib/types/Order/Order";
+import { ScanResult } from "@/lib/types/Result/ScanResult";
+import { ScanState } from "@/lib/types/Result/ScanState";
+
+const initialScanState: ScanState = {
+    status: "idle",
+    progress: 0,
+    result: null,
+    error: null,
+      
+}
 
 export const useAppStore = create<AppState>()(
   persist(
     (set, get) => ({
       targetUrl: "",
+      scannedUrl: "",
       order: null,
-
+      
       payment: { status: "idle" },
+      
+      scan: initialScanState,
+      scanCount: 0,
+      pendingCount: 0,
+      failCount: 0,
+      successCount: 0,
+      slug: "",
+      plan: [],
 
-      scan: { status: "idle", progress: 0 },
-
-      // 🔹 startvärde för filtren
       selectedFilters: [],
 
-      setTargetUrl: (url) => set({ targetUrl: url }),
+      setTargetUrl: (url: string) => set({ targetUrl: url }),
+      setScannedUrl: (url: string) => set({scannedUrl: url}),
 
-      selectPlan: (order) => set({ order }),
+      selectPlan: (order: Order) => set({ order }),
 
-      // ✅ RÄTTAD: skriv "selectedFilters" och använd prev-state
-      setSelectedFilters: (updater) =>
+      setSelectedFilters: (
+        updater: Filter_Label[] | ((prev: Filter_Label[]) => Filter_Label[])
+      ) =>
         set((state) => ({
           selectedFilters:
             typeof updater === "function"
@@ -33,7 +50,44 @@ export const useAppStore = create<AppState>()(
               : updater,
         })),
 
-      startPaymentPending: ({ sessionId, orderId }) =>
+      startScanPending: (url: string) =>
+        set((state) => ({
+          scan: {
+            ...state.scan,
+            status: "pending",
+            progress: 0,
+            error: null,
+          },
+          scannedUrl: url,
+          pendingCount: state.pendingCount + 1, 
+        })),
+      
+        setScanSuccess: (result: ScanResult) => {
+          set((state) => ({
+            scan: {
+              ...state.scan,
+              status: "completed",
+              progress: 100, 
+              result,
+              error: null,
+            },
+            successCount: state.successCount + 1,
+          }))
+        },
+       setScanError: (message: string) => {
+          set((state)  => ({
+            scan: {
+              ...state.scan,
+              status: "failed",
+              progress: 0,
+              result: state.scan.result,
+              error: message,
+            },
+            failCount: state.failCount + 1,
+          }))
+        },
+      
+        startPaymentPending: ({ sessionId, orderId }) =>
         set({ payment: { sessionId, orderId, status: "pending" } }),
 
       setPaymentStatus: (status: PaymentStatus) =>
@@ -41,19 +95,64 @@ export const useAppStore = create<AppState>()(
 
       resetPayment: () => set({ payment: { status: "idle" } }),
 
-      startScan: (jobId: string) =>
-        set((s) => ({
-          scan: { ...s.scan, jobId, status: "queued", progress: 0 },
-        })),
-
       updateScan: (data) =>
         set({
           scan: { ...get().scan, ...data },
         }),
 
+      startScan: () =>
+        set((state) => ({
+          scan: {
+            ...state.scan,
+            status: "pending",
+            progress: 0, 
+            error: null,
+          },
+          pendingCount: state.pendingCount + 1,
+        })),
+        pendingScan: (pending) =>
+          set((state) => ({
+            scan: {
+              status: "pending",
+              progress: 0,
+              result: pending,
+              error: null,
+            },
+            pendingCount: state.pendingCount + 1, 
+          })),
+          
+
+      // 🔹 ingen typ på result → TS fattar från AppState
+      finishScan: (result) => {
+        set((state) => ({
+          scan: {
+            status: "completed",
+            progress: 100,
+            result: result,
+            error: null,
+          },
+          scanCount: state.scanCount + 1,
+          successCount: state.successCount + 1,
+          pendingCount: Math.max(0, state.pendingCount - 1),
+          scannedUrl: state.targetUrl, 
+        }))
+      },
+      failScan: (message: string) =>
+        set((state) => ({
+          scan: {
+              ...state.scan,
+              status: "failed",
+              progress: 0,
+              result: state.scan.result,
+              error: message,
+           },
+            scanCount: state.scanCount + 1,
+            pendingCount: Math.max(0, state.pendingCount - 1),
+        })),
+
       resetScan: () =>
         set({
-          scan: { status: "idle", progress: 0 },
+          scan: initialScanState,
         }),
 
       resetAll: () =>
@@ -61,14 +160,16 @@ export const useAppStore = create<AppState>()(
           targetUrl: "",
           order: null,
           payment: { status: "idle" },
-          scan: { status: "idle", progress: 0 },
+          scan: initialScanState,
+          scanCount: 0,
           selectedFilters: [],
+          slug: "",
+          plan: [],
         }),
     }),
     {
       name: "security-analyser-store",
       storage: createJSONStorage(() => sessionStorage),
-      // här kan du lägga partialize om du vill
     }
   )
 );

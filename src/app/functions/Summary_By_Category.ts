@@ -1,5 +1,5 @@
 import { Category_Label } from "@/lib/types/Filter/Category";
-import { FullSummary} from "@/lib/types/Filter/Summary";
+import { FullSummary} from "@/lib/types/Filter/FullSummary";
 
 export const Summary_By_Category = (summary: FullSummary): Record<Category_Label, any> => ({
     gdpr: summary.gdpr,

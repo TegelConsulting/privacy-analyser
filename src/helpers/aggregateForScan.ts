@@ -1,4 +1,4 @@
-import { ScanResult } from "@/lib/types/ScanResult";
+import { ScanResult } from "@/lib/types/Result/ScanResult";
 
 export function aggregateForScan(s: ScanResult) {
    const httpOnlyCookies = s.cookies.filter((c) => c.httpOnly).length;

@@ -1,7 +1,5 @@
-import { ScanStatus } from "./ScanStatus";
-
 export interface ScanSlice {
     jobId?: string; 
-    status: ScanStatus;
+    status: "idle"  | "pending" | "completed" | "failed";
     progress: number;
 }

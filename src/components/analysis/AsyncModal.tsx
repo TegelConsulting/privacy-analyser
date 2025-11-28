@@ -12,8 +12,8 @@ type AsyncModalProps = {
 
 export const AsyncModal: React.FC<AsyncModalProps> = ({
     open,
-    onClose,
     title,
+    onClose,
     delayMs = 1500,
     children
 }) => {

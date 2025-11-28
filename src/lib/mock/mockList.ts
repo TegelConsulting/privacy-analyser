@@ -6,6 +6,7 @@ export const mockScans: ScanResult[] = [
     id: "id1",
     url: "https://exempel.se",
     timestamp: new Date().toISOString(),
+    scanStatus: "completed",
     cookies: [
       {
         name: "sid",
@@ -56,6 +57,7 @@ export const mockScans: ScanResult[] = [
     id: "id2",
     url: "https://butik.se",
     timestamp: new Date(Date.now() - 3600_000).toISOString(),
+    scanStatus: "completed",
     cookies: [
       { name: "cart", value: "%5B%5D", domain: ".butik.se", path: "/", expires: Date.now() + 86400_000, httpOnly: false, secure: true, sameSite: "Strict" },
       { name: "session", value: "s-999", domain: ".butik.se", path: "/", expires: Date.now() + 86_400_000 * 14, httpOnly: true, secure: true, sameSite: "Lax" },
@@ -97,6 +99,7 @@ export const mockScans: ScanResult[] = [
   {
     id: "id3",
     url: "https://blogg.se",
+    scanStatus: "completed",
     timestamp: new Date(Date.now() - 24 * 3600_000).toISOString(),
     cookies: [
       { name: "theme", value: "dark", domain: ".blogg.se", path: "/", expires: Date.now() + 86_400_000 * 90, httpOnly: false, secure: true, sameSite: "Strict" },

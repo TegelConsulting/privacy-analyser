@@ -1,4 +1,4 @@
-import { Summary } from "@/lib/types/Filter/Summary";
+import { Summary } from "@/lib/types/Filter/FullSummary";
 
  export const summary: Summary = { 
      gdpr: 35, 

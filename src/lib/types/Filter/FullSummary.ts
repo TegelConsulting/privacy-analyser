@@ -1,10 +1,3 @@
-export type Summary = { 
-    gdpr: number; 
-    w3c: number;
-    accessibility: number; 
-    
-};
-
 export type FullSummary = {
     gdpr: string; 
     w3c: string;
