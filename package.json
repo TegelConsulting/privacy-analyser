@@ -19,7 +19,7 @@
     "lucide-react": "^0.546.0",
     "mongodb": "^6.20.0",
     "mongoose": "^8.19.1",
-    "next": "15.5.4",
+    "next": "15.5.7",
     "next-auth": "^5.0.0-beta.29",
     "openai": "^6.9.1",
     "playwright": "^1.56.1",
